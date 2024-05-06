@@ -18,26 +18,24 @@ type Item struct {
 
 func getParsedData(url string) *ParsedData {
 	res, err := http.Get(url)
-	CheckGetXMLErr(err)
+	CheckErr(err)
 	CheckHttpResponse(res)
 	defer res.Body.Close()
 
 	data, err := io.ReadAll(res.Body)
-	CheckIOErr(err)
+	CheckErr(err)
 	var posts ParsedData
 	xmlerr := xml.Unmarshal(data, &posts)
-	CheckUnmarshalErr(xmlerr)
+	CheckErr(xmlerr)
 	return &posts
 }
 
 func getLastIdxToUpdate(posts *ParsedData, updatedDate int64) int8 {
 	lastUpdatedDate := UnixTime2Time(updatedDate)
-	// fmt.Println("이전 업데이트한 날짜", lastUpdatedDate)
 	var index int8 = 0
 	for index < int8(len(posts.Items)) {
 		pubDate := Str2time(posts.Items[index].PubDate)
 		if pubDate.Compare(lastUpdatedDate) == 1 {
-			// fmt.Println("업데이트 대상 날짜", pubDate)
 			index++ // check next post when it needs to update
 		} else {
 			break

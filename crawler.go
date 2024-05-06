@@ -2,7 +2,8 @@ package main
 
 import (
 	"crawler/utils"
-	"fmt"
+	"log/slog"
+	"os"
 	"time"
 )
 
@@ -32,5 +33,18 @@ func New(name, url string) *RSSCrawler {
 func (r *RSSCrawler) Run(currentTime int64) {
 	totalCount, successCount := utils.UpdateDB(r.rss.url, r.rss.lastUpdated)
 	r.rss.lastUpdated = currentTime
-	fmt.Printf("[%s] %d out of %d successfully updated at %s\n", r.name, totalCount, successCount, utils.UnixTime2Time(r.rss.lastUpdated))
+
+	logHandler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+		Level: slog.LevelDebug,
+		// AddSource: true,
+	}).WithAttrs([]slog.Attr{
+		slog.String("crawler", r.name),
+		slog.Group("results",
+			"newly posted", totalCount,
+			"updated", successCount,
+		),
+	})
+	logger := slog.New(logHandler)
+	logger.Debug("executed")
+	// fmt.Printf("[%s] %d out of %d successfully updated at %s\n", r.name, totalCount, successCount, utils.UnixTime2Time(r.rss.lastUpdated))
 }

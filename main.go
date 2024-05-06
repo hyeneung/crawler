@@ -8,6 +8,7 @@ type crawler struct {
 }
 
 func RunCrawlers(crawlers []*RSSCrawler) {
+	// goroutine 적용
 	for _, crawlerInstance := range crawlers {
 		crawlerInstance.Run(time.Now().Unix())
 	}
