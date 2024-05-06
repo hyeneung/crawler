@@ -16,22 +16,24 @@ type rss struct {
 
 // RSSCrawler type
 type RSSCrawler struct {
+	id   uint64
 	name string
 	rss  rss
 }
 
 // Constructor of RSSCrawler
-func New(name, url string) *RSSCrawler {
+func New(_id uint64, _name, _url string) *RSSCrawler {
 	return &RSSCrawler{
-		name: name,
-		// rss:  rss{url: url, lastUpdated: time.Now().Unix()},
-		rss: rss{url: url, lastUpdated: time.Date(2022, 6, 1, 0, 0, 0, 0, time.UTC).Unix()},
+		id:   _id,
+		name: _name,
+		// rss:  rss{url: _url, lastUpdated: time.Now().Unix()},
+		rss: rss{url: _url, lastUpdated: time.Date(2022, 6, 1, 0, 0, 0, 0, time.UTC).Unix()},
 	}
 }
 
 // Run the crawler
 func (r *RSSCrawler) Run(currentTime int64) {
-	totalCount, successCount := utils.UpdateDB(r.rss.url, r.rss.lastUpdated)
+	totalCount, successCount := utils.UpdateDB(r.id, r.rss.url, r.rss.lastUpdated)
 	r.rss.lastUpdated = currentTime
 
 	logHandler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{

@@ -23,9 +23,11 @@ func main() {
 	}
 
 	var crawlers []*RSSCrawler
+	var id uint64 = 0
 	for _, crawlerInfo := range crawlerInfos {
-		crawlerInstance := New(crawlerInfo.name, crawlerInfo.rssURL)
+		crawlerInstance := New(id, crawlerInfo.name, crawlerInfo.rssURL)
 		crawlers = append(crawlers, crawlerInstance)
+		id += 1
 	}
 	RunCrawlers(crawlers)
 }

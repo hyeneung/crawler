@@ -16,15 +16,28 @@
 
 ### 해야할 것(우선순위)
 1. 동작하는 코드
-* utils errorHandler 코드 중복 없애고 로그 남기는 로직 추가
-* databaseHandler 구현
+    [x]utils errorHandler 코드 중복 없애고 로그 남기는 로직 추가
+    [ ]databaseHandler 구현
 2. 학교 과제
-* docker compose로 mysql, line크롤러, 메루카리 크롤러 3개 서비스 구성.
-* main의 run에서 utils package 함수를 gRPC로 호출하도록
+    [ ]docker compose로 mysql, line크롤러, 메루카리 크롤러 3개 서비스 구성.
+    [ ]main의 run에서 utils package 함수를 gRPC로 호출하도록
 3. 성능 개선
-* 전체적으로 goroutine 적용해서 비동기처리
+    [ ]전체적으로 goroutine 적용해서 비동기처리
 4. 운영 측면 기능 추가
-* 하루 단위로 main.go의 RunCrawlers 호출되도록 (linux crontab 적용)
+    [ ]하루 단위로 main.go의 RunCrawlers 호출되도록 (linux crontab 적용)
+    [ ]cmd로 xml path와 크롤러 이름, 크롤러 id 시작 번호 받아서 main 수행
 5. 서비스 완전성(방학때 웹 공부용)
-* rss feed가 제공하지 않는 예전 post 정보 크롤링. db 저장. 
-* 크롤링한 정보를 웹에 게시판 형식으로 게시. 원하는 내용 검색해서 볼 수 있도록.
+    [ ]rss feed가 제공하지 않는 예전 post 정보 크롤링. db 저장. 
+    [ ]크롤링한 정보를 웹에 게시판 형식으로 게시. 원하는 내용 검색해서 볼 수 있도록.
+
+### DB(crawl_data)
+ - insert할 데이터 : (title, url, pubDate)
+    - title과 link는 필수적으로 포함. pubDate는 선택적. [참고] https://www.rssboard.org/rss-specification
+ - 고민할 것 : (1)url 크기, url 중복도메인, (2)같은 게시물 중복 방지
+ - (1)
+    * 방법 1 : id를 크롤러별로 만들고, url 중복도메인 지우고, 크롤러-중복도메인 매핑 테이블 따로 만들기,
+    * 방법 2 : url varchar(큰 값)해서 한 테이블에 넣기.
+ - (2)
+    * id 만들고 AUTO_INCREMENT로 하면 DB 수준에서 중복 처리 못함. 추가 코드 필요 -> goroutine 동기화 문제 걱정됨.
+    * DB 기능 활용 위해 id 대신 크롤러id, pubDate(unix time)을 composite primary key로.
+ - 최종 스키마 : post(crawler_id(PK), pubDate(PK), url), domain(crawler_id(PK,FK), domain_url)
