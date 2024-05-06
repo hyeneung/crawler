@@ -18,6 +18,6 @@ func CheckErr(err error) {
 	if err != nil {
 		logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 		slog.SetDefault(logger)
-		slog.Any("error", err)
+		slog.Error(err.Error())
 	}
 }

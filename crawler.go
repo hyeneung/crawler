@@ -48,5 +48,4 @@ func (r *RSSCrawler) Run(currentTime int64) {
 	})
 	logger := slog.New(logHandler)
 	logger.Debug("executed")
-	// fmt.Printf("[%s] %d out of %d successfully updated at %s\n", r.name, totalCount, successCount, utils.UnixTime2Time(r.rss.lastUpdated))
 }

@@ -16,19 +16,19 @@
 
 ### 해야할 것(우선순위)
 1. 동작하는 코드
-    [x]utils errorHandler 코드 중복 없애고 로그 남기는 로직 추가
-    [ ]databaseHandler 구현
+    완료
 2. 학교 과제
-    [ ]docker compose로 mysql, line크롤러, 메루카리 크롤러 3개 서비스 구성.
-    [ ]main의 run에서 utils package 함수를 gRPC로 호출하도록
+    * docker compose로 mysql, line크롤러, 메루카리 크롤러 3개 서비스 구성.
+    * main의 run에서 utils package 함수를 gRPC로 호출하도록
 3. 성능 개선
-    [ ]전체적으로 goroutine 적용해서 비동기처리
+    * 전체적으로 goroutine 적용해서 비동기처리
+    * post 테이블의 url 도메인 부분/이외 부분 나누어서 post테이블, domain 테이블에 저장
 4. 운영 측면 기능 추가
-    [ ]하루 단위로 main.go의 RunCrawlers 호출되도록 (linux crontab 적용)
-    [ ]cmd로 xml path와 크롤러 이름, 크롤러 id 시작 번호 받아서 main 수행
+    * 하루 단위로 main.go의 RunCrawlers 호출되도록 (linux crontab 적용)
+    * cmd로 xml path와 크롤러 이름, 크롤러 id 시작 번호 받아서 main 수행
 5. 서비스 완전성(방학때 웹 공부용)
-    [ ]rss feed가 제공하지 않는 예전 post 정보 크롤링. db 저장. 
-    [ ]크롤링한 정보를 웹에 게시판 형식으로 게시. 원하는 내용 검색해서 볼 수 있도록.
+    * rss feed가 제공하지 않는 예전 post 정보 크롤링. db 저장. 
+    * 크롤링한 정보를 웹에 게시판 형식으로 게시. 원하는 내용 검색해서 볼 수 있도록.
 
 ### DB(crawl_data)
  - insert할 데이터 : (title, url, pubDate)
@@ -40,4 +40,4 @@
  - (2)
     * id 만들고 AUTO_INCREMENT로 하면 DB 수준에서 중복 처리 못함. 추가 코드 필요 -> goroutine 동기화 문제 걱정됨.
     * DB 기능 활용 위해 id 대신 크롤러id, pubDate(unix time)을 composite primary key로.
- - 최종 스키마 : post(crawler_id(PK), pubDate(PK), url), domain(crawler_id(PK,FK), domain_url)
+ - 최종 스키마 : post(crawler_id(PK), url(PK), title, pubDate(nullable) ), domain(crawler_id(PK,FK), domain_url)

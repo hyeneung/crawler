@@ -12,3 +12,8 @@ func Str2time(strTime string) time.Time {
 	CheckErr(err)
 	return t.UTC()
 }
+
+func Str2UnixTime(strTime string) int64 {
+	t := Str2time(strTime)
+	return t.Unix()
+}
