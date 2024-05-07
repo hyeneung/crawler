@@ -1,0 +1,27 @@
+# docker compose -f ./docker/docker-compose.yml up -d
+# docker exec -it docker-db-1 /bin/bash
+# cat /docker-entrypoint/init_db.sql | mysql -uroot -p1234
+
+# mysql -uroot -p1234
+services:
+  db:
+    image: mysql:8
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: crawl_data
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - ../utils/db/data:/var/lib/mysql
+      - ../utils/db/init_db.sql:/docker-entrypoint/init_db.sql
+    restart: unless-stopped
+    # CVE-2023-24540, CVE-2023-24538 에러 발생
+    # command: cat /docker-entrypoint/init_db.sql | mysql -uroot -p1234
+  
+  # crawler:
+  #   image: 내가 만든 이미지
+  #   depends_on:
+  #     - db
+  #   command: 배포 파일 실행 명령어

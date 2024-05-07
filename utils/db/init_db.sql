@@ -1,0 +1,15 @@
+-- CREATE DATABASE crawl_data default CHARACTER SET UTF8;
+USE crawl_data;
+CREATE TABLE domain(
+    id BIGINT NOT NULL UNIQUE PRIMARY KEY,
+    url VARCHAR(200) NOT NULL
+);
+CREATE TABLE post(
+    id BIGINT NOT NULL,
+    url VARCHAR(100) NOT NULL,
+    title VARCHAR(200) NOT NULL,
+    date BIGINT,
+    PRIMARY KEY(id, url),
+    FOREIGN KEY(id) 
+    REFERENCES domain(id) ON UPDATE CASCADE ON DELETE CASCADE
+);

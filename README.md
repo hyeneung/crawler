@@ -15,14 +15,14 @@
 * xmlHandler : http get 요청으로 RSS feed 파일 받아서 xml 파싱
 
 ### 해야할 것(우선순위)
-1. 동작하는 코드
-    완료
+1. 최소 기능 동작-rss feed를 DB에 저장 (완료)
 2. 학교 과제
-    * docker compose로 mysql, line크롤러, 메루카리 크롤러 3개 서비스 구성.
-    * main의 run에서 utils package 함수를 gRPC로 호출하도록
+    * docker compose로 mysql, 크롤러 2개 서비스 구성.
+    * main의 run에서 utils package 함수를 gRPC로 호출
 3. 성능 개선
     * 전체적으로 goroutine 적용해서 비동기처리
     * post 테이블의 url 도메인 부분/이외 부분 나누어서 post테이블, domain 테이블에 저장
+    * db 계정, 비번 관리
 4. 운영 측면 기능 추가
     * 하루 단위로 main.go의 RunCrawlers 호출되도록 (linux crontab 적용)
     * cmd로 xml path와 크롤러 이름, 크롤러 id 시작 번호 받아서 main 수행
@@ -41,3 +41,32 @@
     * id 만들고 AUTO_INCREMENT로 하면 DB 수준에서 중복 처리 못함. 추가 코드 필요 -> goroutine 동기화 문제 걱정됨.
     * DB 기능 활용 위해 id 대신 크롤러id, pubDate(unix time)을 composite primary key로.
  - 최종 스키마 : post(crawler_id(PK), url(PK), title, pubDate(nullable) ), domain(crawler_id(PK,FK), domain_url)
+
+## docker 
+### docker compose 과제 진행 과정
+- Dockerfile기반 go 이미지 빌드
+```shell
+docker build -t my-crawler:1.0 -f docker/Dockerfile .
+```
+- go 이미지로 컨테이너 실행
+```shell
+docker run -it --name my-running-app my-crawler:1.0
+```
+- vs code remote explorer 이용하여 db 연결 코드 수정 <-여기서 부터 하면 됨
+  - docker compose 실행,mysql init하고 연결 확인할 것.
+- 빌드 후 빌드 파일 제외 다 삭제
+```shell
+이미지 빌드해서 도커허브에 올리는 명령어
+```
+- docker compose에서 내가 올린 이미지 이용
+#### [참고] docker compose 실행
+```shell
+docker compose -f ./docker/docker-compose.yml up -d
+```
+#### [참고] mysql 컨테이너 init
+```shell
+docker exec -it docker-db-1 /bin/bash
+```
+```shell
+cat /docker-entrypoint/init_db.sql | mysql -uroot -p1234
+```
