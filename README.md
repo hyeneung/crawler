@@ -43,7 +43,8 @@ docker compose -f ./docker/docker-compose.yml up -d
 ```
 3. 실행 결과
   * mysqladdmin에 성공적으로 연결되면 crawler 서비스 실행
-![alt text](doc\imgs\compose-result.png)
+![image](https://github.com/hyeneung/crawler/assets/71257602/7cb3f08c-a5c2-4947-8242-d713790da02b)
+
 4. docker hub에 push
 ```shell
 docker tag my-crawler:1.0 hyeneung/crawler:1.0
