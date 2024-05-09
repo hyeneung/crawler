@@ -1,6 +1,3 @@
-# crawler 디렉토리에서 실행(build context 바깥 인식 못함) 
-# docker build -t my-crawler:1.0 -f docker/Dockerfile .
-# docker run -it --rm --name my-running-app my-crawler:1.0
 FROM golang:1.22
 
 WORKDIR /usr/src/app
@@ -10,5 +7,5 @@ COPY go.mod go.sum *.go ./
 RUN go mod download && go mod verify
 
 COPY utils/db/init_db.sql utils/*.go ./utils/
-# RUN go build -v -o /usr/local/bin/{빌드 파일 이름} ./
-# CMD ["빌드 파일 이름"]
+RUN go build -v -o /usr/local/bin/execute_crawler ./
+# CMD ["빌드 파일 이름 - execute_crawler"]

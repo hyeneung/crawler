@@ -7,16 +7,16 @@ import (
 )
 
 type ParsedData struct {
-	Items []Item `xml:"channel>item"`
+	Data []Post `xml:"channel>item"`
 }
 
-type Item struct {
+type Post struct {
 	Title   string `xml:"title"`
 	Link    string `xml:"link"`
 	PubDate string `xml:"pubDate"`
 }
 
-func getParsedData(url string) *ParsedData {
+func getParsedData(url string) []Post {
 	res, err := http.Get(url)
 	CheckErr(err)
 	CheckHttpResponse(res)
@@ -27,15 +27,18 @@ func getParsedData(url string) *ParsedData {
 	var posts ParsedData
 	xmlerr := xml.Unmarshal(data, &posts)
 	CheckErr(xmlerr)
-	return &posts
+	return posts.Data
 }
 
-func getLastIdxToUpdate(posts *ParsedData, updatedDate int64) int8 {
+func getLastIdxToUpdate(posts []Post, domainURL string, updatedDate int64) int8 {
 	lastUpdatedDate := UnixTime2Time(updatedDate)
 	var index int8 = 0
-	for index < int8(len(posts.Items)) {
-		pubDate := Str2time(posts.Items[index].PubDate)
+	pathStartIdx := len("https://") + len(domainURL)
+	for index < int8(len(posts)) {
+		post := posts[index]
+		pubDate := Str2time(post.PubDate)
 		if pubDate.Compare(lastUpdatedDate) == 1 {
+			posts[index].Link = post.Link[pathStartIdx:]
 			index++ // check next post when it needs to update
 		} else {
 			break
