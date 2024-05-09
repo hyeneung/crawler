@@ -12,13 +12,18 @@ services:
       # var/lib/mysql에 없으면 docker-entrypoint-initdb.d에서 찾으니까 이걸 먼저
       - ../utils/db/init_db.sql:/docker-entrypoint-initdb.d/init.sql
       - ../utils/db/data:/var/lib/mysql
-      
+    healthcheck: # mysqladdmin에 성공적으로 연결되면 crawler 서비스 실행
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD']
+      interval: 5s
+      timeout: 2s
+      retries: 10
+
   crawler:
     image: my-crawler:1.0
     depends_on:
-      - db
-    # 컨테이너가 중단됐을 때(db보다 먼저 살아나서 요청한 바람에 에러 뜬 경우) 컨테이너를 다시 알아서 재시작
-    restart: on-failure
+      db:
+        condition: service_healthy
+    # restart: on-failure # 컨테이너가 중단됐을 때(db보다 먼저 살아나서 요청한 바람에 에러 뜬 경우) 컨테이너를 다시 알아서 재시작
     command: bash -c "execute_crawler"  # 빌드 파일. Dockerfile 참고
 volumes:
   db:

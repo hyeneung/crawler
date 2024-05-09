@@ -19,7 +19,7 @@ func logDomain(crawlerName string) {
 		slog.String("crawler", crawlerName),
 	})
 	logger := slog.New(logHandler)
-	logger.Debug("Init Done")
+	logger.Info("Init Done")
 }
 
 // log the result
@@ -35,7 +35,7 @@ func logPost(crawlerName string, totalCount int8, successCount uint8) {
 		),
 	})
 	logger := slog.New(logHandler)
-	logger.Debug("Done")
+	logger.Info("Done")
 }
 
 func main() {

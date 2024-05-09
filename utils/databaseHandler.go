@@ -31,8 +31,7 @@ func InsertDomainDB(crawlerID uint64, domainURL string) {
 	conn := getConnection()
 	defer conn.Close()
 	_, err := conn.Exec("INSERT INTO domain (id, url) VALUES (?, ?)", crawlerID, domainURL)
-	CheckDBInsertErr(err) // 임시. 실제로는 참조 무결성 위반 가능성 배제 위해 아래꺼 exit되는거 써야 함.
-	// CheckErr(err)
+	CheckErr(err)
 }
 
 func insertPostDB(posts []Post, crawlerID uint64) uint8 {
