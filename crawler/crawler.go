@@ -81,7 +81,7 @@ func (r *RSSCrawler) Run(currentTime int64) {
 	posts := utils.GetParsedData(r.rss.url)
 	domainURL := strings.Split(r.rss.url, "/")[2]
 
-	lastIdxToUpdate := utils.CheckUpdatedPost(posts, domainURL, r.rss.lastUpdated)
+	lastIdxToUpdate := utils.CheckUpdatedPost(posts, r.id, domainURL, r.rss.lastUpdated)
 	if lastIdxToUpdate < 0 {
 		logRun(r.name, postNumToUpdate, postNumUpdated)
 		return

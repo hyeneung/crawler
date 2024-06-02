@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package service;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "/service";
+
+service ResultInfo {
+    rpc InsertDomain(UnaryRequest) returns (Response);
+    rpc InsertPosts(stream Post) returns (google.protobuf.UInt32Value);
+    rpc GetLogs(google.protobuf.UInt64Value) returns (stream Response);
+    rpc InsertPosts_(stream Post) returns (stream Response);
+}
+
+message UnaryRequest{
+    uint64 id = 1;
+    string url = 2;
+}
+
+message Response {
+    uint64 id = 1;
+    string message = 2;
+}
+
+message Post {
+    uint64 id = 1;
+    string title = 2;
+    string link = 3;
+    string pubDate = 4;
+}

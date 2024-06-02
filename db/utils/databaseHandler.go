@@ -2,16 +2,11 @@ package utils
 
 import (
 	"database/sql"
+	"db/service"
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
-
-type Post struct {
-	Title   string
-	Link    string
-	PubDate string
-}
 
 type connectionInfo struct {
 	username string
@@ -40,7 +35,7 @@ func InsertDomainDB(crawlerID uint64, domainURL string) error {
 	return err
 }
 
-func InsertPostDB(crawlerID uint64, post Post) error {
+func InsertPostDB(post *service.Post) error {
 	conn := getConnection()
 	defer conn.Close() // connection 반환(resource pool 이용)
 	// TODO - connection 하나 받을 때 post 하나씩 넣지 말고 한 번에 여러 개 넣을 것.
@@ -48,7 +43,7 @@ func InsertPostDB(crawlerID uint64, post Post) error {
 	checkFatalErr(err)
 	defer stmt.Close()
 
-	_, err = stmt.Exec(crawlerID, post.Link, post.Title, Str2UnixTime(post.PubDate))
+	_, err = stmt.Exec(post.Id, post.Link, post.Title, Str2UnixTime(post.PubDate))
 
 	return err
 }

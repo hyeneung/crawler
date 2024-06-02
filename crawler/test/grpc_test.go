@@ -1,19 +1,21 @@
 package test
 
 import (
+	"crawler/utils"
+	"strings"
 	"testing"
+	"time"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestInsertDomain(t *testing.T) {
-	// res := service.InsertDomain(1, "test url")
-	// assert.Equal(t, res.Id, uint64(1))
-	// assert.Equal(t, res.Message, "Succeed")
+	posts := utils.GetParsedData("https://techblog.lycorp.co.jp/ko/feed/index.xml")
 
-	// res = service.InsertDomain(1, "test url")
-	// assert.Equal(t, res.Message, "[Failed] Dupulicated data insertion. Change the \"lastUpdated\" value in crawler.go file or Delete utils/db/data")
+	domainURL := strings.Split("https://techblog.lycorp.co.jp/ko/feed/index.xml", "/")[2]
 
-	// largeBytes := make([]byte, 501)
-	// longString := string(largeBytes)
-	// res = service.InsertDomain(1, longString)
-	// assert.Equal(t, res.Message, "[Failed] URL or title exceeded 500 bytes")
+	lastIdxToUpdate := utils.CheckUpdatedPost(posts, uint64(13), domainURL, time.Now().Unix())
+
+	assert.Equal(t, posts[0].Id, uint64(13))
+	assert.Equal(t, lastIdxToUpdate, int8(-1))
 }
