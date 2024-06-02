@@ -16,7 +16,7 @@ type Post struct {
 	PubDate string `xml:"pubDate"`
 }
 
-func getParsedData(url string) []Post {
+func GetParsedData(url string) []Post {
 	res, err := http.Get(url)
 	CheckErr(err)
 	CheckHttpResponse(res)
@@ -30,7 +30,7 @@ func getParsedData(url string) []Post {
 	return posts.Data
 }
 
-func getLastIdxToUpdate(posts []Post, domainURL string, updatedDate int64) int8 {
+func CheckUpdatedPost(posts []Post, domainURL string, updatedDate int64) int8 {
 	lastUpdatedDate := UnixTime2Time(updatedDate)
 	var index int8 = 0
 	pathStartIdx := len("https://") + len(domainURL)

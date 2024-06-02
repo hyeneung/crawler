@@ -1,23 +1,15 @@
-package utils
+package db
 
 import (
 	"log/slog"
-	"net/http"
 	"os"
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/martinohmann/exit"
 )
 
-func CheckHttpResponse(resp *http.Response) {
-	if resp.StatusCode != http.StatusOK {
-		logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
-		slog.SetDefault(logger)
-		slog.Error("HTTP response error", slog.Int("Status Code", resp.StatusCode))
-	}
-}
-
-func CheckDBInsertErr(err error) {
+// grpc
+func checkDBInsertErr(err error) error {
 	if err != nil {
 		mysqlErr, _ := err.(*mysql.MySQLError)
 		if mysqlErr != nil {
@@ -33,16 +25,20 @@ func CheckDBInsertErr(err error) {
 				// 	slog.Error("Executed repeatedly. Change the \"lastUpdated\" value in crawler.go file or Delete utils/db/data")
 			}
 		} else {
-			CheckErr(err)
+			return checkErr(err)
 		}
 	}
+	return nil
 }
 
-func CheckErr(err error) {
+// grpc
+func checkErr(err error) error {
 	if err != nil {
 		logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
 		slog.SetDefault(logger)
 		slog.Error(err.Error())
-		exit.Exit(err)
+		defer exit.Exit(err)
+		return err
 	}
+	return nil
 }
