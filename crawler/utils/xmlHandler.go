@@ -38,6 +38,7 @@ func CheckUpdatedPost(posts []Post, domainURL string, updatedDate int64) int8 {
 		post := posts[index]
 		pubDate := Str2time(post.PubDate)
 		if pubDate.Compare(lastUpdatedDate) == 1 {
+			// URL parsing
 			posts[index].Link = post.Link[pathStartIdx:]
 			index++ // check next post when it needs to update
 		} else {

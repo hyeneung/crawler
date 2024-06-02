@@ -2,7 +2,6 @@ package main
 
 import (
 	"crawler/utils"
-	"crawler/utils/db"
 	"log/slog"
 	"os"
 	"strings"
@@ -50,13 +49,13 @@ func logInit(crawlerName string) {
 func (r *RSSCrawler) Init() {
 	// "https://techblog.lycorp.co.jp/ko/migrate-mysql-with-read-only-mode"
 	// ["https:" "" "techblog.lycorp.co.jp" "ko" "migrate-mysql-with-read-only-mode"]
-	domainURL := strings.Split(r.rss.url, "/")[2]
+	// domainURL := strings.Split(r.rss.url, "/")[2]
 
-	// TODO - grpc unary
-	err := db.InsertDomain(r.id, domainURL)
+	// // TODO - grpc unary
+	// err := db.InsertDomain(r.id, domainURL)
 
-	utils.CheckDBInsertErr(err)
-	logInit(r.name)
+	// utils.CheckDBInsertErr(err)
+	// logInit(r.name)
 }
 
 // log the result
@@ -87,14 +86,14 @@ func (r *RSSCrawler) Run(currentTime int64) {
 		logRun(r.name, postNumToUpdate, postNumUpdated)
 		return
 	}
-	var postsToUpdate []utils.Post = posts[:lastIdxToUpdate+1]
+	// var postsToUpdate []utils.Post = posts[:lastIdxToUpdate+1]
 
-	// TODO - grpc client streaming
-	var successCount uint8 = db.InsertPosts_(postsToUpdate)
-	// TODO - grpc server streaming
-	var logs []string = db.GetLogs(r.id)
-	// TODO - grpc biddirectional streaming
-	var logs []string = db.InsertPosts(postsToUpdate)
+	// // TODO - grpc client streaming
+	// var successCount uint8 = db.InsertPosts_(postsToUpdate)
+	// // TODO - grpc server streaming
+	// var logs []string = db.GetLogs(r.id)
+	// // TODO - grpc biddirectional streaming
+	// var logs []string = db.InsertPosts(postsToUpdate)
 
 	r.rss.lastUpdated = currentTime
 	logRun(r.name, postNumToUpdate, postNumUpdated)

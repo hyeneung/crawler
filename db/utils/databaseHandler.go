@@ -1,4 +1,4 @@
-package db
+package utils
 
 import (
 	"database/sql"
@@ -23,37 +23,32 @@ type connectionInfo struct {
 
 func getConnection() *sql.DB {
 	// docker exec -it docker-crawler-1 /bin/bash   // host : "db"
-	info := connectionInfo{username: "root", password: "1234", host: "db", port: 3306, database: "crawl_data"}
+	info := connectionInfo{username: "root", password: "1234", host: "127.0.0.1", port: 3306, database: "crawl_data"}
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", info.username, info.password, info.host, info.port, info.database)
 	conn, err := sql.Open("mysql", dsn)
-	checkErr(err)
+	checkFatalErr(err)
 	// conn.SetConnMaxLifetime(time.Minute * 3)
-	// conn.SetMaxOpenConns(10)
-	// conn.SetMaxIdleConns(10)
+	conn.SetMaxOpenConns(10)
+	conn.SetMaxIdleConns(10) // connection pool
 	return conn
 }
 
-func insertDomainDB(crawlerID uint64, domainURL string) {
+func InsertDomainDB(crawlerID uint64, domainURL string) error {
 	conn := getConnection()
-	defer conn.Close()
+	defer conn.Close() // connection 반환(resource pool 이용)
 	_, err := conn.Exec("INSERT INTO domain (id, url) VALUES (?, ?)", crawlerID, domainURL)
-	checkErr(err)
+	return err
 }
 
-func insertPostDB(calledCnt uint8, crawlerID uint64, url string, title string, date uint64) uint8 {
+func InsertPostDB(crawlerID uint64, post Post) error {
 	conn := getConnection()
-	// defer conn.Close() // resource pool 이용.반환
+	defer conn.Close() // connection 반환(resource pool 이용)
+	// TODO - connection 하나 받을 때 post 하나씩 넣지 말고 한 번에 여러 개 넣을 것.
 	stmt, err := conn.Prepare("INSERT INTO post (id, url, title, date) VALUES (?, ?, ?, ?)")
-	checkErr(err)
+	checkFatalErr(err)
 	defer stmt.Close()
-	var updatedCount uint8 = 0
-	for _, post := range posts {
-		// goroutine 적용 - updatedCount 동기화 문제 발생가능. 처리방법 확인
-		_, err := stmt.Exec(crawlerID, post.Link, post.Title, Str2UnixTime(post.PubDate))
-		checkDBInsertErr(err)
-		if err == nil {
-			updatedCount += 1
-		}
-	}
-	return updatedCount
+
+	_, err = stmt.Exec(crawlerID, post.Link, post.Title, Str2UnixTime(post.PubDate))
+
+	return err
 }
