@@ -40,10 +40,12 @@ func InsertPostDB(post *service.Post) error {
 	defer conn.Close() // connection 반환(resource pool 이용)
 	// TODO - connection 하나 받을 때 post 하나씩 넣지 말고 한 번에 여러 개 넣을 것.
 	stmt, err := conn.Prepare("INSERT INTO post (id, url, title, date) VALUES (?, ?, ?, ?)")
-	checkFatalErr(err)
+
+	if err != nil {
+		return err
+	}
 	defer stmt.Close()
 
 	_, err = stmt.Exec(post.Id, post.Link, post.Title, Str2UnixTime(post.PubDate))
-
 	return err
 }

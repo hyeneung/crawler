@@ -31,11 +31,11 @@ func GetParsedData(url string) []Post {
 	return posts.Data
 }
 
-func CheckUpdatedPost(posts []Post, id uint64, domainURL string, updatedDate int64) int8 {
+func CheckUpdatedPost(posts []Post, id uint64, domainURL string, updatedDate int64) int32 {
 	lastUpdatedDate := UnixTime2Time(updatedDate)
-	var index int8 = 0
+	var index int32 = 0
 	pathStartIdx := len("https://") + len(domainURL)
-	for index < int8(len(posts)) {
+	for index < int32(len(posts)) {
 		post := posts[index]
 		// id 할당
 		posts[index].Id = id

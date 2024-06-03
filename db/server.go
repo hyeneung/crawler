@@ -6,14 +6,14 @@ import (
 	"db/utils"
 	"io"
 	"log"
+	"log/slog"
 	"net"
+	"os"
 
 	pb "db/service"
 
 	wrapper "github.com/golang/protobuf/ptypes/wrappers"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
 )
 
 const (
@@ -24,16 +24,10 @@ type server struct {
 	pb.UnimplementedResultInfoServer
 }
 
-func InsertDomain(crawlerID uint64, domainURL string) *service.Response {
-	err := utils.InsertDomainDB(crawlerID, domainURL)
-	message, _ := utils.GetResponseMessage(err)
-	return &service.Response{Id: crawlerID, Message: message}
-}
 func (s *server) InsertDomain(ctx context.Context, in *pb.UnaryRequest) (*pb.Response, error) {
 	err := utils.InsertDomainDB(in.Id, in.Url)
-	message, _ := utils.GetResponseMessage(err)
-	log.Println(message)
-	return &pb.Response{Id: in.Id, Message: message}, status.New(codes.OK, "").Err()
+	message := utils.DBLogMessage(in.Id, err)
+	return &pb.Response{Id: in.Id, Message: message}, err
 }
 
 // Client-side Streaming RPC
@@ -46,13 +40,14 @@ func (s *server) InsertPosts(stream pb.ResultInfo_InsertPostsServer) error {
 			return stream.SendAndClose(&wrapper.UInt32Value{Value: updatedCount})
 		}
 		if err != nil {
+			slog.Error(err.Error())
 			return err
 		}
 		err = utils.InsertPostDB(post)
-		_, is_success := utils.GetResponseMessage(err)
-		if is_success {
+		message := utils.DBLogMessage(post.Id, err)
+		if err != nil {
 			updatedCount += 1
-			log.Printf("Updated")
+			slog.Debug(message)
 		}
 	}
 }
@@ -80,31 +75,33 @@ func (s *server) GetLogs(searchQuery *wrapper.UInt64Value, stream pb.ResultInfo_
 
 // Bi-directional Streaming RPC
 func (s *server) InsertPosts_(stream pb.ResultInfo_InsertPosts_Server) error {
-
-	responses := []service.Response{} // cannot use &response (value of type *Response) as *service.Response value
 	for {
 		post, err := stream.Recv()
 		if err == io.EOF {
-			// Client has sent all the messages
-			// Send remaining shipments
-			for _, response := range responses {
-				if err := stream.Send(&response); err != nil {
-					return err
-				}
-			}
+			slog.Debug("Client has sent all the messages")
 			return nil
 		}
 		if err != nil {
-			log.Println(err)
+			slog.Error(err.Error())
 			return err
 		}
 		err = utils.InsertPostDB(post)
-		message, _ := utils.GetResponseMessage(err)
-		responses = append(responses, service.Response{Id: post.Id, Message: message})
+		message := utils.DBLogMessage(post.Id, err)
+		if err != nil {
+			return err
+		}
+		response := service.Response{Id: post.Id, Message: message}
+		if err := stream.Send(&response); err != nil {
+			slog.Error(err.Error())
+			return err
+		}
 	}
 }
 
 func main() {
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	slog.SetDefault(logger)
+
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)

@@ -10,7 +10,7 @@ import (
 
 func InsertDomain(crawlerID uint64, domainURL string) *service.Response {
 	err := utils.InsertDomainDB(crawlerID, domainURL)
-	message, _ := utils.GetResponseMessage(err)
+	message := utils.DBLogMessage(crawlerID, err)
 	return &service.Response{Id: crawlerID, Message: message}
 }
 func TestInsertDomain(t *testing.T) {

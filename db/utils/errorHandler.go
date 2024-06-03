@@ -8,18 +8,27 @@ import (
 	"github.com/martinohmann/exit"
 )
 
-func GetResponseMessage(err error) (string, bool) {
+func DBLogMessage(crawlerId uint64, err error) string {
 	var message string
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	logHandler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
+		Level: slog.LevelDebug,
+		// AddSource: true,
+	}).WithAttrs([]slog.Attr{
+		slog.Uint64("crawlerId", crawlerId),
+	})
+	logger := slog.New(logHandler)
+
 	slog.SetDefault(logger)
 	if err == nil {
-		return "Succeed", true
+		message = "Succeed"
+		slog.Debug(message)
+		return message
 	}
 	mysqlErr, _ := err.(*mysql.MySQLError)
 	if mysqlErr == nil {
 		message = "[Failed] Not using MySQL"
 		slog.Error(message)
-		return message, false
+		return message
 	}
 	switch mysqlErr.Number {
 	case 1406:
@@ -30,8 +39,9 @@ func GetResponseMessage(err error) (string, bool) {
 		slog.Error(message)
 	default:
 		message = err.Error()
+		slog.Error(message)
 	}
-	return message, false
+	return message
 }
 
 func checkFatalErr(err error) {
