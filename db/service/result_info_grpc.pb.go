@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 )
 
@@ -32,7 +33,7 @@ const (
 type ResultInfoClient interface {
 	InsertDomain(ctx context.Context, in *UnaryRequest, opts ...grpc.CallOption) (*Response, error)
 	InsertPosts(ctx context.Context, opts ...grpc.CallOption) (ResultInfo_InsertPostsClient, error)
-	GetLogs(ctx context.Context, in *wrapperspb.UInt64Value, opts ...grpc.CallOption) (ResultInfo_GetLogsClient, error)
+	GetLogs(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (ResultInfo_GetLogsClient, error)
 	InsertPosts_(ctx context.Context, opts ...grpc.CallOption) (ResultInfo_InsertPosts_Client, error)
 }
 
@@ -89,7 +90,7 @@ func (x *resultInfoInsertPostsClient) CloseAndRecv() (*wrapperspb.UInt32Value, e
 	return m, nil
 }
 
-func (c *resultInfoClient) GetLogs(ctx context.Context, in *wrapperspb.UInt64Value, opts ...grpc.CallOption) (ResultInfo_GetLogsClient, error) {
+func (c *resultInfoClient) GetLogs(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (ResultInfo_GetLogsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &ResultInfo_ServiceDesc.Streams[1], ResultInfo_GetLogs_FullMethodName, cOpts...)
 	if err != nil {
@@ -106,7 +107,7 @@ func (c *resultInfoClient) GetLogs(ctx context.Context, in *wrapperspb.UInt64Val
 }
 
 type ResultInfo_GetLogsClient interface {
-	Recv() (*Response, error)
+	Recv() (*LogData, error)
 	grpc.ClientStream
 }
 
@@ -114,8 +115,8 @@ type resultInfoGetLogsClient struct {
 	grpc.ClientStream
 }
 
-func (x *resultInfoGetLogsClient) Recv() (*Response, error) {
-	m := new(Response)
+func (x *resultInfoGetLogsClient) Recv() (*LogData, error) {
+	m := new(LogData)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -160,7 +161,7 @@ func (x *resultInfoInsertPosts_Client) Recv() (*Response, error) {
 type ResultInfoServer interface {
 	InsertDomain(context.Context, *UnaryRequest) (*Response, error)
 	InsertPosts(ResultInfo_InsertPostsServer) error
-	GetLogs(*wrapperspb.UInt64Value, ResultInfo_GetLogsServer) error
+	GetLogs(*emptypb.Empty, ResultInfo_GetLogsServer) error
 	InsertPosts_(ResultInfo_InsertPosts_Server) error
 	mustEmbedUnimplementedResultInfoServer()
 }
@@ -175,7 +176,7 @@ func (UnimplementedResultInfoServer) InsertDomain(context.Context, *UnaryRequest
 func (UnimplementedResultInfoServer) InsertPosts(ResultInfo_InsertPostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method InsertPosts not implemented")
 }
-func (UnimplementedResultInfoServer) GetLogs(*wrapperspb.UInt64Value, ResultInfo_GetLogsServer) error {
+func (UnimplementedResultInfoServer) GetLogs(*emptypb.Empty, ResultInfo_GetLogsServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetLogs not implemented")
 }
 func (UnimplementedResultInfoServer) InsertPosts_(ResultInfo_InsertPosts_Server) error {
@@ -239,7 +240,7 @@ func (x *resultInfoInsertPostsServer) Recv() (*Post, error) {
 }
 
 func _ResultInfo_GetLogs_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(wrapperspb.UInt64Value)
+	m := new(emptypb.Empty)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
@@ -247,7 +248,7 @@ func _ResultInfo_GetLogs_Handler(srv interface{}, stream grpc.ServerStream) erro
 }
 
 type ResultInfo_GetLogsServer interface {
-	Send(*Response) error
+	Send(*LogData) error
 	grpc.ServerStream
 }
 
@@ -255,7 +256,7 @@ type resultInfoGetLogsServer struct {
 	grpc.ServerStream
 }
 
-func (x *resultInfoGetLogsServer) Send(m *Response) error {
+func (x *resultInfoGetLogsServer) Send(m *LogData) error {
 	return x.ServerStream.SendMsg(m)
 }
 

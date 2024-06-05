@@ -1,13 +1,9 @@
 package main
 
 import (
-	"context"
 	"crawler/service"
 	"crawler/utils"
-	"io"
-	"log"
 	"log/slog"
-	"os"
 	"strings"
 	"time"
 )
@@ -20,15 +16,15 @@ type rss struct {
 }
 
 // RSSCrawler type
-type RSSCrawler struct {
+type rssCrawler struct {
 	id   uint64
 	name string
 	rss  rss
 }
 
 // Constructor of RSSCrawler
-func New(_id uint64, _name string, _url string) *RSSCrawler {
-	return &RSSCrawler{
+func New(_id uint64, _name string, _url string) *rssCrawler {
+	return &rssCrawler{
 		id:   _id,
 		name: _name,
 		rss: rss{
@@ -38,113 +34,46 @@ func New(_id uint64, _name string, _url string) *RSSCrawler {
 		},
 	}
 }
-func logInit(res *service.Response, crawlerName string) {
-	logHandler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.LevelDebug,
-		// AddSource: true,
-	}).WithAttrs([]slog.Attr{
-		slog.String("crawler", crawlerName),
-		slog.String("db_log", res.Message),
-	})
-	logger := slog.New(logHandler)
-	logger.Info("Init Done")
+
+func getDomainURL(url string) string {
+	// "https://techblog.lycorp.co.jp/ko/migrate-mysql-with-read-only-mode"
+	// ["https:" "" "techblog.lycorp.co.jp" "ko" "migrate-mysql-with-read-only-mode"]
+	return strings.Split(url, "/")[2]
 }
 
 // Init the crawler
-func (r *RSSCrawler) Init(stub *service.ResultInfoClient) {
-	// "https://techblog.lycorp.co.jp/ko/migrate-mysql-with-read-only-mode"
-	// ["https:" "" "techblog.lycorp.co.jp" "ko" "migrate-mysql-with-read-only-mode"]
-	domainURL := strings.Split(r.rss.url, "/")[2]
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
-	defer cancel()
-
+func (r *rssCrawler) Init(stub *service.ResultInfoClient) {
+	domainURL := getDomainURL(r.rss.url)
 	// grpc unary
-	res, err := (*stub).InsertDomain(ctx, &service.UnaryRequest{Id: r.id, Url: domainURL})
-	if err != nil {
-		slog.Error(err.Error())
-	}
-	logInit(res, r.name)
-}
-
-// log the result
-func logRun(crawlerName string, totalCount int32, successCount uint32) {
-	logHandler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.LevelDebug,
-		// AddSource: true,
-	}).WithAttrs([]slog.Attr{
-		slog.String("crawler", crawlerName),
-		slog.Group("results",
-			"newly posted", totalCount,
-			"updated", successCount,
-		),
-	})
-	logger := slog.New(logHandler)
-	logger.Info("Done")
+	slog.Info("starting gRPC unary")
+	message := insertDomain(stub, r.id, domainURL)
+	utils.LogInit(message, r.name)
 }
 
 // Run the crawler
-func (r *RSSCrawler) Run(stub *service.ResultInfoClient, currentTime int64) {
+func (r *rssCrawler) Run(stub *service.ResultInfoClient, currentTime int64) {
 	var postNumToUpdate int32 = 0
 	var postNumUpdated uint32 = 0
+	// DB에 새로 넣어야 할 게시물 정보 가져옴
 	var posts []utils.Post = utils.GetParsedData(r.rss.url)
-	domainURL := strings.Split(r.rss.url, "/")[2]
+	domainURL := getDomainURL(r.rss.url)
 	var lastIdxToUpdate int32 = utils.CheckUpdatedPost(posts, r.id, domainURL, r.rss.lastUpdated)
 	if lastIdxToUpdate < 0 {
-		logRun(r.name, postNumToUpdate, postNumUpdated)
+		utils.LogRun(r.name, postNumToUpdate, postNumUpdated)
 		return
 	}
 	postNumToUpdate = lastIdxToUpdate + 1
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
-	defer cancel()
-
-	// // grpc client streaming
-	// insertStream, err := (*stub).InsertPosts(ctx)
-	// utils.CheckErr(err)
-	// for i := 0; i < int(lastIdxToUpdate+1); i++ {
-	// 	post := posts[i]
-	// 	data := service.Post{Id: post.Id, Title: post.Title,
-	// 		Link: post.Link, PubDate: post.PubDate}
-	// 	err := insertStream.Send(&data)
-	// 	utils.CheckErr(err)
-	// }
-	// res, err := insertStream.CloseAndRecv()
-	// postNumUpdated = res.Value
-	// if err != nil {
-	// 	slog.Error(err.Error())
-	// }
-
-	// // TODO - grpc server streaming
-	// var logs []string = db.GetLogs(r.id)
-
-	// grpc biddirectional streaming
-	insertStream, err := (*stub).InsertPosts_(ctx)
-	utils.CheckErr(err)
-	channel := make(chan struct{})
-	go asncClientBidirectionalRPC(insertStream, channel)
-	for i := 0; i < int(lastIdxToUpdate+1); i++ {
-		post := posts[i]
-		data := service.Post{Id: post.Id, Title: post.Title,
-			Link: post.Link, PubDate: post.PubDate}
-		err := insertStream.Send(&data)
-		utils.CheckErr(err)
+	// grpc client streaming
+	if r.id == 0 {
+		slog.Info("starting gRPC client streaming")
+		postNumUpdated = insertPost_clientStreaming(stub, &posts, lastIdxToUpdate)
+	} else {
+		// grpc bidirectional streaming
+		slog.Info("starting gRPC bidirectional streaming")
+		postNumUpdated = insertPost_bidirectionalStreaming(stub, &posts, lastIdxToUpdate)
 	}
-	if err := insertStream.CloseSend(); err != nil {
-		log.Fatal(err)
-	}
-	channel <- struct{}{}
+
 	r.rss.lastUpdated = currentTime
-	logRun(r.name, postNumToUpdate, postNumUpdated)
-}
-
-func asncClientBidirectionalRPC(streamPost service.ResultInfo_InsertPosts_Client, c chan struct{}) {
-	for {
-		res, err := streamPost.Recv()
-		if err == io.EOF {
-			break
-		}
-		// TODO - insert 성공 횟수 처리
-		slog.Debug(res.Message)
-	}
-	<-c
+	utils.LogRun(r.name, postNumToUpdate, postNumUpdated)
 }

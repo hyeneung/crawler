@@ -2,7 +2,6 @@ package utils
 
 import (
 	"log/slog"
-	"os"
 
 	"github.com/go-sql-driver/mysql"
 	"github.com/martinohmann/exit"
@@ -10,18 +9,12 @@ import (
 
 func DBLogMessage(crawlerId uint64, err error) string {
 	var message string
-	logHandler := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{
-		Level: slog.LevelDebug,
-		// AddSource: true,
-	}).WithAttrs([]slog.Attr{
-		slog.Uint64("crawlerId", crawlerId),
-	})
-	logger := slog.New(logHandler)
-
-	slog.SetDefault(logger)
+	DBLogger := SlogLogger.With(
+		slog.Uint64("crawler_id", crawlerId))
+	slog.SetDefault(DBLogger)
 	if err == nil {
 		message = "Succeed"
-		slog.Debug(message)
+		slog.Info(message)
 		return message
 	}
 	mysqlErr, _ := err.(*mysql.MySQLError)
@@ -46,8 +39,7 @@ func DBLogMessage(crawlerId uint64, err error) string {
 
 func checkFatalErr(err error) {
 	if err != nil {
-		logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
-		slog.SetDefault(logger)
+		slog.SetDefault(SlogLogger)
 		slog.Error(err.Error())
 		exit.Exit(err)
 	}

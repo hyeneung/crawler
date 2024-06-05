@@ -3,13 +3,14 @@ syntax = "proto3";
 package service;
 
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
 
 option go_package = "/service";
 
 service ResultInfo {
     rpc InsertDomain(UnaryRequest) returns (Response);
     rpc InsertPosts(stream Post) returns (google.protobuf.UInt32Value);
-    rpc GetLogs(google.protobuf.UInt64Value) returns (stream Response);
+    rpc GetLogs(google.protobuf.Empty) returns (stream LogData);
     rpc InsertPosts_(stream Post) returns (stream Response);
 }
 
@@ -21,6 +22,10 @@ message UnaryRequest{
 message Response {
     uint64 id = 1;
     string message = 2;
+}
+
+message LogData {
+  bytes message = 1;
 }
 
 message Post {
