@@ -19,15 +19,15 @@ type Post struct {
 
 func GetParsedData(url string) []Post {
 	res, err := http.Get(url)
-	CheckErr(err)
+	CheckErr(err, SlogLogger)
 	CheckHttpResponse(res)
 	defer res.Body.Close()
 
 	data, err := io.ReadAll(res.Body)
-	CheckErr(err)
+	CheckErr(err, SlogLogger)
 	var posts ParsedData
 	xmlerr := xml.Unmarshal(data, &posts)
-	CheckErr(xmlerr)
+	CheckErr(xmlerr, SlogLogger)
 	return posts.Data
 }
 

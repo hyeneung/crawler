@@ -43,15 +43,21 @@ func getDomainURL(url string) string {
 
 // Init the crawler
 func (r *rssCrawler) Init(stub *service.ResultInfoClient) {
+	logger := utils.SlogLogger.With(
+		slog.Uint64("crawlerId", r.id),
+	)
 	domainURL := getDomainURL(r.rss.url)
 	// grpc unary
-	slog.Info("starting gRPC unary")
+	logger.Info("starting gRPC unary")
 	message := insertDomain(stub, r.id, domainURL)
 	utils.LogInit(message, r.name)
 }
 
 // Run the crawler
 func (r *rssCrawler) Run(stub *service.ResultInfoClient, currentTime int64) {
+	logger := utils.SlogLogger.With(
+		slog.Uint64("crawlerId", r.id),
+	)
 	var postNumToUpdate int32 = 0
 	var postNumUpdated uint32 = 0
 	// DB에 새로 넣어야 할 게시물 정보 가져옴
@@ -66,11 +72,11 @@ func (r *rssCrawler) Run(stub *service.ResultInfoClient, currentTime int64) {
 
 	// grpc client streaming
 	if r.id == 0 {
-		slog.Info("starting gRPC client streaming")
+		logger.Info("starting gRPC client streaming")
 		postNumUpdated = insertPost_clientStreaming(stub, &posts, lastIdxToUpdate)
 	} else {
 		// grpc bidirectional streaming
-		slog.Info("starting gRPC bidirectional streaming")
+		logger.Info("starting gRPC bidirectional streaming")
 		postNumUpdated = insertPost_bidirectionalStreaming(stub, &posts, lastIdxToUpdate)
 	}
 

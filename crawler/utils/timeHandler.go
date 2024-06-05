@@ -27,7 +27,7 @@ func Str2time(strTime string) time.Time {
 		}
 	}
 
-	CheckErr(errors.New("time format error"))
+	CheckErr(errors.New("time format error"), SlogLogger)
 	return time.Time{}
 }
 

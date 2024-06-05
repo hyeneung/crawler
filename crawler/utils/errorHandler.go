@@ -16,10 +16,9 @@ func CheckHttpResponse(resp *http.Response) {
 	}
 }
 
-func CheckErr(err error) {
+func CheckErr(err error, logger *slog.Logger) {
 	if err != nil {
-		slog.SetDefault(SlogLogger)
-		slog.Error(err.Error())
+		logger.Error(err.Error())
 		// exit.Exit(err)
 	}
 }

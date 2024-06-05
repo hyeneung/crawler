@@ -43,7 +43,6 @@ func LogInit(message string, crawlerName string) {
 		slog.String("crawler", crawlerName),
 		slog.String("db_log", message),
 	)
-	slog.SetDefault(initLogger)
 	initLogger.Info("Init Done")
 }
 
@@ -56,7 +55,6 @@ func LogRun(crawlerName string, totalCount int32, successCount uint32) {
 			"updated", successCount,
 		),
 	)
-	slog.SetDefault(resultLogger)
 
 	resultLogger.Info("Done")
 }

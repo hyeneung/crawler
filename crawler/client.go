@@ -11,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/martinohmann/exit"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/protobuf/types/known/emptypb"
@@ -18,33 +19,39 @@ import (
 
 // Unary
 func insertDomain(stub *pb.ResultInfoClient, id uint64, url string) string {
+	logger := utils.SlogLogger.With(
+		slog.Uint64("crawlerId", id),
+	)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 
 	res, err := (*stub).InsertDomain(ctx, &pb.UnaryRequest{Id: id, Url: url})
 	if err != nil {
-		slog.Error(err.Error())
+		logger.Error(err.Error())
 	}
 	return res.Message
 }
 
 // grpc client streaming
 func insertPost_clientStreaming(stub *pb.ResultInfoClient, posts *[]utils.Post, lastIdxToUpdate int32) uint32 {
+	logger := utils.SlogLogger.With(
+		slog.Uint64("crawlerId", (*posts)[0].Id),
+	)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 
 	insertStream, err := (*stub).InsertPosts(ctx)
-	utils.CheckErr(err)
+	utils.CheckErr(err, logger)
 	for i := 0; i < int(lastIdxToUpdate+1); i++ {
 		post := (*posts)[i]
 		data := pb.Post{Id: post.Id, Title: post.Title,
 			Link: post.Link, PubDate: post.PubDate}
 		err := insertStream.Send(&data)
-		utils.CheckErr(err)
+		utils.CheckErr(err, logger)
 	}
 	res, err := insertStream.CloseAndRecv()
 	if err != nil {
-		slog.Error(err.Error())
+		logger.Error(err.Error())
 	}
 	return res.Value
 }
@@ -55,7 +62,7 @@ func printServerLogs(stub *pb.ResultInfoClient) {
 	defer cancel()
 
 	stream, err := (*stub).GetLogs(ctx, &emptypb.Empty{})
-	utils.CheckErr(err)
+	utils.CheckErr(err, utils.SlogLogger)
 	for {
 		logs, err := stream.Recv()
 		if err == io.EOF {
@@ -71,11 +78,14 @@ func printServerLogs(stub *pb.ResultInfoClient) {
 
 // grpc biddirectional streaming
 func insertPost_bidirectionalStreaming(stub *pb.ResultInfoClient, posts *[]utils.Post, lastIdxToUpdate int32) uint32 {
+	logger := utils.SlogLogger.With(
+		slog.Uint64("crawlerId", (*posts)[0].Id),
+	)
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 
 	insertStream, err := (*stub).InsertPosts_(ctx)
-	utils.CheckErr(err)
+	utils.CheckErr(err, logger)
 
 	c := make(chan uint32)
 	go asncClientBidirectionalRPC(insertStream, c)
@@ -85,22 +95,22 @@ func insertPost_bidirectionalStreaming(stub *pb.ResultInfoClient, posts *[]utils
 		data := pb.Post{Id: post.Id, Title: post.Title,
 			Link: post.Link, PubDate: post.PubDate}
 		err := insertStream.Send(&data)
-		utils.CheckErr(err)
+		utils.CheckErr(err, logger)
 	}
 	if err := insertStream.CloseSend(); err != nil {
-		log.Fatal(err)
+		logger.Error(err.Error())
+		exit.Exit(err)
 	}
 	return <-c
 }
 func asncClientBidirectionalRPC(streamPost pb.ResultInfo_InsertPosts_Client, c chan<- uint32) {
 	var successCount uint32 = 0
 	for {
-		res, err := streamPost.Recv()
+		_, err := streamPost.Recv()
 		if err == io.EOF {
 			break
 		}
 		successCount++
-		slog.Info(res.Message)
 	}
 	c <- successCount
 }

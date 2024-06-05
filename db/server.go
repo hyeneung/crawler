@@ -34,7 +34,6 @@ func (s *server) InsertPosts(stream pb.ResultInfo_InsertPostsServer) error {
 	for {
 		post, err := stream.Recv()
 		if err == io.EOF {
-			slog.Info("Client has sent all the messages")
 			return stream.SendAndClose(&wrapper.UInt32Value{Value: updatedCount})
 		}
 		if err != nil {
@@ -83,7 +82,6 @@ func (s *server) InsertPosts_(stream pb.ResultInfo_InsertPosts_Server) error {
 	for {
 		post, err := stream.Recv()
 		if err == io.EOF {
-			slog.Info("Client has sent all the messages")
 			return nil
 		}
 		if err != nil {
