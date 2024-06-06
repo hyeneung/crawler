@@ -1,0 +1,20 @@
+{"time":"2024-06-06T23:56:14.6290627+09:00","level":"INFO","msg":"starting gRPC unary","crawlerId":2}
+{"time":"2024-06-06T23:56:14.6290627+09:00","level":"INFO","msg":"starting gRPC unary","crawlerId":0}
+{"time":"2024-06-06T23:56:14.6290627+09:00","level":"INFO","msg":"starting gRPC unary","crawlerId":1}
+{"time":"2024-06-06T23:56:14.6526412+09:00","level":"INFO","msg":"finished gRPC unary","crawlerId":0}
+{"time":"2024-06-06T23:56:14.6526412+09:00","level":"INFO","msg":"Init Done","crawler":"lineCrawler","db_log":"Succeed"}
+{"time":"2024-06-06T23:56:14.6526412+09:00","level":"INFO","msg":"finished gRPC unary","crawlerId":1}
+{"time":"2024-06-06T23:56:14.6526412+09:00","level":"INFO","msg":"finished gRPC unary","crawlerId":2}
+{"time":"2024-06-06T23:56:14.6526412+09:00","level":"INFO","msg":"Init Done","crawler":"mercariCrawler","db_log":"Succeed"}
+{"time":"2024-06-06T23:56:14.6526412+09:00","level":"INFO","msg":"Init Done","crawler":"kurleyCrawler","db_log":"Succeed"}
+{"time":"2024-06-06T23:56:14.8307086+09:00","level":"INFO","msg":"starting gRPC bidirectional streaming","crawlerId":2}
+{"time":"2024-06-06T23:56:14.9731199+09:00","level":"INFO","msg":"finished gRPC bidirectional streaming","crawlerId":2}
+{"time":"2024-06-06T23:56:14.9731199+09:00","level":"INFO","msg":"Done","crawler":"kurleyCrawler","results":{"newly posted":43,"updated":43}}
+{"time":"2024-06-06T23:56:15.2071149+09:00","level":"INFO","msg":"starting gRPC bidirectional streaming","crawlerId":1}
+{"time":"2024-06-06T23:56:15.4432439+09:00","level":"INFO","msg":"starting gRPC client streaming","crawlerId":0}
+{"time":"2024-06-06T23:56:15.5652871+09:00","level":"INFO","msg":"finished gRPC bidirectional streaming","crawlerId":1}
+{"time":"2024-06-06T23:56:15.5658352+09:00","level":"INFO","msg":"Done","crawler":"mercariCrawler","results":{"newly posted":100,"updated":100}}
+{"time":"2024-06-06T23:56:15.5787701+09:00","level":"INFO","msg":"finished gRPC client streaming","crawlerId":0}
+{"time":"2024-06-06T23:56:15.5792846+09:00","level":"INFO","msg":"Done","crawler":"lineCrawler","results":{"newly posted":44,"updated":44}}
+{"time":"2024-06-06T23:56:15.5792846+09:00","level":"INFO","msg":"starting gRPC server streaming"}
+{"time":"2024-06-06T23:56:15.5936734+09:00","level":"INFO","msg":"finished gRPC server streaming"}
