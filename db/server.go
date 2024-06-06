@@ -5,9 +5,11 @@ import (
 	"db/utils"
 	"errors"
 	"io"
+	"io/fs"
 	"log/slog"
 	"net"
 	"os"
+	"sync"
 
 	pb "db/service"
 
@@ -23,6 +25,7 @@ type server struct {
 
 // Unary
 func (s *server) InsertDomain(ctx context.Context, in *pb.UnaryRequest) (*pb.Response, error) {
+	slog.Info("[Received] "+in.Url, "Id : ", in.Id)
 	err := utils.InsertDomainDB(in.Id, in.Url)
 	message := utils.DBLogMessage(in.Id, err) // log 남김
 	return &pb.Response{Id: in.Id, Message: message}, err
@@ -40,6 +43,7 @@ func (s *server) InsertPosts(stream pb.ResultInfo_InsertPostsServer) error {
 			slog.Error(err.Error())
 			return err
 		}
+		slog.Info("[Received] "+post.Title, "Id : ", post.Id)
 		err = utils.InsertPostDB(post)
 		utils.DBLogMessage(post.Id, err)
 		if err == nil {
@@ -63,41 +67,102 @@ func (s *server) GetLogs(empty *emptypb.Empty, stream pb.ResultInfo_GetLogsServe
 		slog.Error("directory is empty")
 		return errors.New("directory is empty")
 	}
+	slog.Info("log file fetched")
+	// goroutine
+	var wg sync.WaitGroup
+	errChan := make(chan error, len(files))
 	for _, file := range files {
-		logFile, err := os.ReadFile(dir + "/" + file.Name())
-		if err != nil {
-			slog.Error(err.Error())
-			return err
-		}
-		if err := stream.Send(&pb.LogData{Message: logFile}); err != nil {
-			slog.Error(err.Error())
-			return err
-		}
+		wg.Add(1)
+		go func(file fs.DirEntry) {
+			defer wg.Done()
+			logFile, err := os.ReadFile(dir + "/" + file.Name())
+			if err != nil {
+				errChan <- err
+				return
+			}
+			if err := stream.Send(&pb.LogData{Message: logFile}); err != nil {
+				errChan <- err
+				return
+			}
+		}(file)
+	}
+	go func() {
+		wg.Wait()
+		close(errChan)
+	}()
+	if err := <-errChan; err != nil {
+		slog.Error(err.Error())
+		return err
 	}
 	return nil
 }
 
 // Bi-directional Streaming RPC
 func (s *server) InsertPosts_(stream pb.ResultInfo_InsertPosts_Server) error {
-	for {
-		post, err := stream.Recv()
-		if err == io.EOF {
-			return nil
+	// for {
+	// 	post, err := stream.Recv()
+	// 	if err == io.EOF {
+	// 		return nil
+	// 	}
+	// 	if err != nil {
+	// 		slog.Error(err.Error())
+	// 		return err
+	// 	}
+	// 	slog.Info("[Received] "+post.Title, "Id : ", post.Id)
+	// 	err = utils.InsertPostDB(post)
+	// 	message := utils.DBLogMessage(post.Id, err)
+	// 	if err != nil {
+	// 		return err
+	// 	}
+	// 	response := pb.Response{Id: post.Id, Message: message}
+	// 	if err := stream.Send(&response); err != nil {
+	// 		slog.Error(err.Error())
+	// 		return err
+	// 	}
+	// }
+	var wg sync.WaitGroup
+	postChan := make(chan *pb.Post, 10)
+	errChan := make(chan error, 1)
+	// goroutine
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for {
+			post, err := stream.Recv()
+			if err == io.EOF {
+				close(postChan)
+				return
+			}
+			if err != nil {
+				slog.Error(err.Error())
+				errChan <- err
+				return
+			}
+			slog.Info("[Received] "+post.Title, "Id : ", post.Id)
+			postChan <- post
 		}
-		if err != nil {
-			slog.Error(err.Error())
-			return err
-		}
-		err = utils.InsertPostDB(post)
+	}()
+
+	for post := range postChan {
+		err := utils.InsertPostDB(post)
 		message := utils.DBLogMessage(post.Id, err)
 		if err != nil {
+			close(errChan)
 			return err
 		}
 		response := pb.Response{Id: post.Id, Message: message}
 		if err := stream.Send(&response); err != nil {
 			slog.Error(err.Error())
+			close(errChan)
 			return err
 		}
+	}
+	wg.Wait()
+	select {
+	case err := <-errChan:
+		return err
+	default:
+		return nil
 	}
 }
 

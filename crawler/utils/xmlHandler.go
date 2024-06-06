@@ -49,6 +49,7 @@ func CheckUpdatedPost(posts []Post, id uint64, domainURL string, updatedDate int
 			if pubDate.Compare(lastUpdatedDate) == 1 {
 				// URL parsing
 				posts[i].Link = post.Link[pathStartIdx:]
+				posts[i].Id = id
 				lastIdx = i
 			} else {
 				break

@@ -4,11 +4,10 @@ import (
 	"context"
 	pb "crawler/service"
 	"crawler/utils"
-	"fmt"
 	"io"
 	"log"
 	"log/slog"
-	"strings"
+	"os"
 	"sync"
 	"time"
 
@@ -67,11 +66,16 @@ func insertPost_clientStreaming(stub *pb.ResultInfoClient, posts *[]utils.Post, 
 }
 
 // grpc server streaming
-func printServerLogs(stub *pb.ResultInfoClient) {
+func saveServerLogs(stub *pb.ResultInfoClient) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
 
 	stream, err := (*stub).GetLogs(ctx, &emptypb.Empty{})
+	utils.CheckErr(err, utils.SlogLogger)
+
+	filePath := "./log/serverLog.log"
+	file, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	defer file.Close()
 	utils.CheckErr(err, utils.SlogLogger)
 
 	for {
@@ -82,8 +86,10 @@ func printServerLogs(stub *pb.ResultInfoClient) {
 		if err != nil {
 			slog.Error(err.Error())
 		}
-		dbLog := strings.Replace(string(logs.Message), `\"`, `"`, -1)
-		fmt.Println("server streaming", dbLog)
+		_, err = file.Write(logs.Message)
+		if err != nil {
+			slog.Error(err.Error())
+		}
 	}
 }
 
@@ -164,24 +170,21 @@ func main() {
 	defer conn.Close()
 	stub := pb.NewResultInfoClient(conn)
 
-	var id uint64 = 0
 	var wg sync.WaitGroup
-	for _, c := range crawlerInfos {
+	for i, c := range crawlerInfos {
 		wg.Add(1)
 		go func(id uint64, c crawlerInfo) {
 			defer wg.Done()
 			rssCrawler := New(id, c.name, c.rssURL)
 			rssCrawler.Init(&stub)                   // domain DB에 crawler id, domain url 저장
 			rssCrawler.Run(&stub, time.Now().Unix()) // post DB에 게시물 정보 저장
-		}(id, c)
-		id += 1
+		}(uint64(i), c)
 	}
-
 	// Wait for all goroutines to finish
 	wg.Wait()
 
 	// grpc server streaming
 	slog.Info("starting gRPC server streaming")
-	printServerLogs(&stub)
+	saveServerLogs(&stub)
 	slog.Info("finished gRPC server streaming")
 }
