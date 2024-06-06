@@ -99,27 +99,6 @@ func (s *server) GetLogs(empty *emptypb.Empty, stream pb.ResultInfo_GetLogsServe
 
 // Bi-directional Streaming RPC
 func (s *server) InsertPosts_(stream pb.ResultInfo_InsertPosts_Server) error {
-	// for {
-	// 	post, err := stream.Recv()
-	// 	if err == io.EOF {
-	// 		return nil
-	// 	}
-	// 	if err != nil {
-	// 		slog.Error(err.Error())
-	// 		return err
-	// 	}
-	// 	slog.Info("[Received] "+post.Title, "Id : ", post.Id)
-	// 	err = utils.InsertPostDB(post)
-	// 	message := utils.DBLogMessage(post.Id, err)
-	// 	if err != nil {
-	// 		return err
-	// 	}
-	// 	response := pb.Response{Id: post.Id, Message: message}
-	// 	if err := stream.Send(&response); err != nil {
-	// 		slog.Error(err.Error())
-	// 		return err
-	// 	}
-	// }
 	var wg sync.WaitGroup
 	postChan := make(chan *pb.Post, 10)
 	errChan := make(chan error, 1)

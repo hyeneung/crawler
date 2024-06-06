@@ -2,29 +2,21 @@
 * 기술 블로그들 검색 사이트 만들기
   * 회사 상관 없이 제목으로 검색 가능하도록 DB구성, 검색 웹사이트 구축
 ### 프로젝트 전체 구성
-1. DB 저장 코드
-* main package
-  * main : 크롤러 인스턴스들 생성, 실행
-  * crawler.go : 크롤러 동작 정의. 
-* utils package
-  * xmlHandler : http get 요청으로 RSS feed 파일 받아서 xml 파싱
-  * errorHandler : 에러처리 , log남김
-  * timeHandler : int64, string, time.Time 간 시간 표현 변환
-    * time.Time이 heap쓰는거 피하기 위함
-* utils/db package - 다른 컨테이너에서 실행될 것들
-  * databaseHandler : DB handler 동작 정의
-  * errorHandler : 에러처리 , log남김
-  * mainDB : DB handler 객체 생성. gRPC 호출되는 함수 정의
-
-1. 웹 사이트 운영
+1. crawler
+- RSS feed 파일 바탕으로 게시물 크롤링
+- gRPC client. gRPC로 db(handler)의 insert 함수 호출
+2. db(handler)
+- gRPC server. 게시물 정보 받아 db에 insert
+3. 웹 사이트 운영
 * later
 ### 해야할 것(우선순위)
 1. 최소 기능 동작-rss feed를 DB에 저장 (완료)
 2. 학교 과제
     * [x] docker compose로 mysql, 크롤러 2개 서비스 구성.
-    * [ ] main package에서 db package의 함수를 gRPC로 호출
+    * [x] main package에서 db package의 함수를 gRPC로 호출
+    * [ ] kubernetes 이용해서 cralwer pod과 db pod 실행
 3. 성능 개선
-    * [ ] 전체적으로 goroutine 적용해서 비동기처리
+    * [x] 전체적으로 goroutine 적용해서 비동기처리
 4. 운영 측면 기능 추가
     * [ ] 하루 단위로 프로그램 실행. 기술 블로그 업데이트 확인 및 반영 (linux crontab 적용)
     * [ ] cmd로 xml path와 크롤러 이름, 크롤러 id 시작 번호 받아서 프로그램 수행
@@ -33,27 +25,7 @@
     * [ ] 크롤링한 정보를 웹에 게시판 형식으로 게시. 원하는 내용 검색해서 볼 수 있도록.
     * [ ] db 계정, 비번 정보 코드에서 빼서 따로 관리
 ###  docker로 실행
-1. Dockerfile기반 go 이미지 빌드
-```shell
-docker build -t my-crawler:1.0 -f docker/Dockerfile .
-```
-2. docker compose 실행(해당 이미지 이용)
-   * 한 번만 하면 volume mount가 돼서 컨테이너 지우고 다시 실행해도 남아 있음
-   * utils/db/data 폴더를 지우거나 crawler.go 의 생성자에서 lastUpdated를 바꾸면 됨 
-```shell
-docker compose -f ./docker/docker-compose.yml up
-```
-3. 실행 결과
-  * mysqladdmin에 성공적으로 연결되면 crawler 서비스 실행
-![image](https://github.com/hyeneung/crawler/assets/71257602/7cb3f08c-a5c2-4947-8242-d713790da02b)
-  * 당시 코드 : https://github.com/hyeneung/crawler/tree/a8cf288694e468338426b4d56386ad25eb273265
-4. docker hub에 push
-```shell
-docker tag my-crawler:1.0 hyeneung/crawler:1.0
-```
-```shell
-docker push hyeneung/crawler:1.0
-```
+- https://github.com/hyeneung/crawler/tree/a8cf288694e468338426b4d56386ad25eb273265
 ### goroutine 적용기
 1. 하나의 프로그램 내. 크롤러 동작 비동기 처리
      * [이전] main.go에서 한 회사의 블로그 정보를 다 저장해야 다른 회사꺼 DB에 저장
@@ -82,8 +54,4 @@ docker push hyeneung/crawler:1.0
    *  post(crawler_id(PK, FK), url(PK), title, pubDate(nullable) )
       *  pubDate nullable인 이유 : RSS 파일에서 optional임 [참고]https://www.rssboard.org/rss-specification
 2. 트랜잭션 적용
- * 필요 없음
-
-### 코드 설계
- * DB handler 객체로 만들어서 connection pool 관리
-   * crawler의 확장성과 가용한 connection 수의 한계를 고려함
+ * 하나씩 insert만 하니까 트랜잭션 적용 시 db 성능 저하 우려
