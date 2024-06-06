@@ -50,6 +50,7 @@ func (r *rssCrawler) Init(stub *service.ResultInfoClient) {
 	// grpc unary
 	logger.Info("starting gRPC unary")
 	message := insertDomain(stub, r.id, domainURL)
+	logger.Info("finished gRPC unary")
 	utils.LogInit(message, r.name)
 }
 
@@ -60,7 +61,6 @@ func (r *rssCrawler) Run(stub *service.ResultInfoClient, currentTime int64) {
 	)
 	var postNumToUpdate int32 = 0
 	var postNumUpdated uint32 = 0
-	// DB에 새로 넣어야 할 게시물 정보 가져옴
 	var posts []utils.Post = utils.GetParsedData(r.rss.url)
 	domainURL := getDomainURL(r.rss.url)
 	var lastIdxToUpdate int32 = utils.CheckUpdatedPost(posts, r.id, domainURL, r.rss.lastUpdated)
@@ -70,14 +70,17 @@ func (r *rssCrawler) Run(stub *service.ResultInfoClient, currentTime int64) {
 	}
 	postNumToUpdate = lastIdxToUpdate + 1
 
-	// grpc client streaming
+	// 데모용
 	if r.id == 0 {
+		// grpc client streaming
 		logger.Info("starting gRPC client streaming")
 		postNumUpdated = insertPost_clientStreaming(stub, &posts, lastIdxToUpdate)
+		logger.Info("finished gRPC client streaming")
 	} else {
 		// grpc bidirectional streaming
 		logger.Info("starting gRPC bidirectional streaming")
 		postNumUpdated = insertPost_bidirectionalStreaming(stub, &posts, lastIdxToUpdate)
+		logger.Info("finished gRPC bidirectional streaming")
 	}
 
 	r.rss.lastUpdated = currentTime

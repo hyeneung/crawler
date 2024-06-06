@@ -9,6 +9,7 @@ import (
 	"log"
 	"log/slog"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/martinohmann/exit"
@@ -42,13 +43,22 @@ func insertPost_clientStreaming(stub *pb.ResultInfoClient, posts *[]utils.Post, 
 
 	insertStream, err := (*stub).InsertPosts(ctx)
 	utils.CheckErr(err, logger)
-	for i := 0; i < int(lastIdxToUpdate+1); i++ {
-		post := (*posts)[i]
-		data := pb.Post{Id: post.Id, Title: post.Title,
-			Link: post.Link, PubDate: post.PubDate}
+
+	// goroutine
+	var wg sync.WaitGroup
+	wg.Add(int(lastIdxToUpdate) + 1)
+
+	worker := func(post utils.Post) {
+		defer wg.Done()
+		data := pb.Post{Id: post.Id, Title: post.Title, Link: post.Link, PubDate: post.PubDate}
 		err := insertStream.Send(&data)
 		utils.CheckErr(err, logger)
 	}
+	for i := 0; i < int(lastIdxToUpdate)+1; i++ {
+		go worker((*posts)[i])
+	}
+	wg.Wait()
+
 	res, err := insertStream.CloseAndRecv()
 	if err != nil {
 		logger.Error(err.Error())
@@ -63,6 +73,7 @@ func printServerLogs(stub *pb.ResultInfoClient) {
 
 	stream, err := (*stub).GetLogs(ctx, &emptypb.Empty{})
 	utils.CheckErr(err, utils.SlogLogger)
+
 	for {
 		logs, err := stream.Recv()
 		if err == io.EOF {
@@ -87,23 +98,32 @@ func insertPost_bidirectionalStreaming(stub *pb.ResultInfoClient, posts *[]utils
 	insertStream, err := (*stub).InsertPosts_(ctx)
 	utils.CheckErr(err, logger)
 
+	// goroutine(receiver)
 	c := make(chan uint32)
-	go asncClientBidirectionalRPC(insertStream, c)
+	go receiveWorker(insertStream, c)
 
-	for i := 0; i < int(lastIdxToUpdate+1); i++ {
-		post := (*posts)[i]
-		data := pb.Post{Id: post.Id, Title: post.Title,
-			Link: post.Link, PubDate: post.PubDate}
+	// goroutine(sender)
+	var wg sync.WaitGroup
+	wg.Add(int(lastIdxToUpdate) + 1)
+	sendWorker := func(post utils.Post) {
+		defer wg.Done()
+		data := pb.Post{Id: post.Id, Title: post.Title, Link: post.Link, PubDate: post.PubDate}
 		err := insertStream.Send(&data)
 		utils.CheckErr(err, logger)
 	}
+	for i := 0; i < int(lastIdxToUpdate)+1; i++ {
+		go sendWorker((*posts)[i])
+	}
+	wg.Wait()
+
+	// 다 보냈으면 close
 	if err := insertStream.CloseSend(); err != nil {
 		logger.Error(err.Error())
 		exit.Exit(err)
 	}
-	return <-c
+	return <-c // receiver로부터 결과 취합
 }
-func asncClientBidirectionalRPC(streamPost pb.ResultInfo_InsertPosts_Client, c chan<- uint32) {
+func receiveWorker(streamPost pb.ResultInfo_InsertPosts_Client, c chan<- uint32) {
 	var successCount uint32 = 0
 	for {
 		_, err := streamPost.Recv()
@@ -145,14 +165,23 @@ func main() {
 	stub := pb.NewResultInfoClient(conn)
 
 	var id uint64 = 0
-	for _, crawlerInfo := range crawlerInfos {
-		// TODO - goroutine 적용
-		rssCrawler := New(id, crawlerInfo.name, crawlerInfo.rssURL)
-		rssCrawler.Init(&stub)                   // domain DB에 crawler id, domain url 저장
-		rssCrawler.Run(&stub, time.Now().Unix()) // post DB에 게시물 정보 저장
+	var wg sync.WaitGroup
+	for _, c := range crawlerInfos {
+		wg.Add(1)
+		go func(id uint64, c crawlerInfo) {
+			defer wg.Done()
+			rssCrawler := New(id, c.name, c.rssURL)
+			rssCrawler.Init(&stub)                   // domain DB에 crawler id, domain url 저장
+			rssCrawler.Run(&stub, time.Now().Unix()) // post DB에 게시물 정보 저장
+		}(id, c)
 		id += 1
 	}
+
+	// Wait for all goroutines to finish
+	wg.Wait()
+
 	// grpc server streaming
 	slog.Info("starting gRPC server streaming")
 	printServerLogs(&stub)
+	slog.Info("finished gRPC server streaming")
 }

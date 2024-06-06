@@ -1,0 +1,20 @@
+{"time":"2024-06-06T18:17:11.1319621+09:00","level":"INFO","msg":"starting gRPC unary","crawlerId":2}
+{"time":"2024-06-06T18:17:11.1319621+09:00","level":"INFO","msg":"starting gRPC unary","crawlerId":1}
+{"time":"2024-06-06T18:17:11.1319621+09:00","level":"INFO","msg":"starting gRPC unary","crawlerId":0}
+{"time":"2024-06-06T18:17:11.1556083+09:00","level":"INFO","msg":"finished gRPC unary","crawlerId":0}
+{"time":"2024-06-06T18:17:11.1556083+09:00","level":"INFO","msg":"Init Done","crawler":"lineCrawler","db_log":"Succeed"}
+{"time":"2024-06-06T18:17:11.1556083+09:00","level":"INFO","msg":"finished gRPC unary","crawlerId":1}
+{"time":"2024-06-06T18:17:11.1562742+09:00","level":"INFO","msg":"finished gRPC unary","crawlerId":2}
+{"time":"2024-06-06T18:17:11.1562742+09:00","level":"INFO","msg":"Init Done","crawler":"mercariCrawler","db_log":"Succeed"}
+{"time":"2024-06-06T18:17:11.1562742+09:00","level":"INFO","msg":"Init Done","crawler":"kurleyCrawler","db_log":"Succeed"}
+{"time":"2024-06-06T18:17:11.350846+09:00","level":"INFO","msg":"starting gRPC client streaming","crawlerId":0}
+{"time":"2024-06-06T18:17:11.4741558+09:00","level":"INFO","msg":"finished gRPC client streaming","crawlerId":0}
+{"time":"2024-06-06T18:17:11.4746654+09:00","level":"INFO","msg":"Done","crawler":"lineCrawler","results":{"newly posted":44,"updated":44}}
+{"time":"2024-06-06T18:17:11.5149309+09:00","level":"INFO","msg":"starting gRPC bidirectional streaming","crawlerId":2}
+{"time":"2024-06-06T18:17:11.631841+09:00","level":"INFO","msg":"finished gRPC bidirectional streaming","crawlerId":2}
+{"time":"2024-06-06T18:17:11.631841+09:00","level":"INFO","msg":"Done","crawler":"kurleyCrawler","results":{"newly posted":43,"updated":43}}
+{"time":"2024-06-06T18:17:11.7534675+09:00","level":"INFO","msg":"starting gRPC bidirectional streaming","crawlerId":1}
+{"time":"2024-06-06T18:17:11.9970872+09:00","level":"INFO","msg":"finished gRPC bidirectional streaming","crawlerId":1}
+{"time":"2024-06-06T18:17:11.9970872+09:00","level":"INFO","msg":"Done","crawler":"mercariCrawler","results":{"newly posted":100,"updated":100}}
+{"time":"2024-06-06T18:17:11.9975916+09:00","level":"INFO","msg":"starting gRPC server streaming"}
+{"time":"2024-06-06T18:17:12.0282451+09:00","level":"INFO","msg":"finished gRPC server streaming"}
