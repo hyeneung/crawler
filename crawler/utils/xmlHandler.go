@@ -11,33 +11,37 @@ type ParsedData struct {
 }
 
 type Post struct {
+	Id      uint64
 	Title   string `xml:"title"`
 	Link    string `xml:"link"`
 	PubDate string `xml:"pubDate"`
 }
 
-func getParsedData(url string) []Post {
+func GetParsedData(url string) []Post {
 	res, err := http.Get(url)
-	CheckErr(err)
+	CheckErr(err, SlogLogger)
 	CheckHttpResponse(res)
 	defer res.Body.Close()
 
 	data, err := io.ReadAll(res.Body)
-	CheckErr(err)
+	CheckErr(err, SlogLogger)
 	var posts ParsedData
 	xmlerr := xml.Unmarshal(data, &posts)
-	CheckErr(xmlerr)
+	CheckErr(xmlerr, SlogLogger)
 	return posts.Data
 }
 
-func getLastIdxToUpdate(posts []Post, domainURL string, updatedDate int64) int8 {
+func CheckUpdatedPost(posts []Post, id uint64, domainURL string, updatedDate int64) int32 {
 	lastUpdatedDate := UnixTime2Time(updatedDate)
-	var index int8 = 0
+	var index int32 = 0
 	pathStartIdx := len("https://") + len(domainURL)
-	for index < int8(len(posts)) {
+	for index < int32(len(posts)) {
 		post := posts[index]
+		// id 할당
+		posts[index].Id = id
 		pubDate := Str2time(post.PubDate)
 		if pubDate.Compare(lastUpdatedDate) == 1 {
+			// URL parsing
 			posts[index].Link = post.Link[pathStartIdx:]
 			index++ // check next post when it needs to update
 		} else {

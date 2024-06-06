@@ -1,7 +1,9 @@
 package main
 
 import (
+	"crawler/service"
 	"crawler/utils"
+	"log/slog"
 	"strings"
 	"time"
 )
@@ -14,15 +16,15 @@ type rss struct {
 }
 
 // RSSCrawler type
-type RSSCrawler struct {
+type rssCrawler struct {
 	id   uint64
 	name string
 	rss  rss
 }
 
 // Constructor of RSSCrawler
-func New(_id uint64, _name string, _url string) *RSSCrawler {
-	return &RSSCrawler{
+func New(_id uint64, _name string, _url string) *rssCrawler {
+	return &rssCrawler{
 		id:   _id,
 		name: _name,
 		rss: rss{
@@ -33,18 +35,51 @@ func New(_id uint64, _name string, _url string) *RSSCrawler {
 	}
 }
 
-// Init the crawler
-func (r *RSSCrawler) Init() {
+func getDomainURL(url string) string {
 	// "https://techblog.lycorp.co.jp/ko/migrate-mysql-with-read-only-mode"
 	// ["https:" "" "techblog.lycorp.co.jp" "ko" "migrate-mysql-with-read-only-mode"]
-	domainURL := strings.Split(r.rss.url, "/")[2]
-	utils.InsertDomainDB(r.id, domainURL)
+	return strings.Split(url, "/")[2]
+}
+
+// Init the crawler
+func (r *rssCrawler) Init(stub *service.ResultInfoClient) {
+	logger := utils.SlogLogger.With(
+		slog.Uint64("crawlerId", r.id),
+	)
+	domainURL := getDomainURL(r.rss.url)
+	// grpc unary
+	logger.Info("starting gRPC unary")
+	message := insertDomain(stub, r.id, domainURL)
+	utils.LogInit(message, r.name)
 }
 
 // Run the crawler
-func (r *RSSCrawler) Run(currentTime int64) (int8, uint8) {
-	domainURL := strings.Split(r.rss.url, "/")[2]
-	totalCount, successCount := utils.InsertPostDB(r.id, r.rss.url, domainURL, r.rss.lastUpdated)
+func (r *rssCrawler) Run(stub *service.ResultInfoClient, currentTime int64) {
+	logger := utils.SlogLogger.With(
+		slog.Uint64("crawlerId", r.id),
+	)
+	var postNumToUpdate int32 = 0
+	var postNumUpdated uint32 = 0
+	// DB에 새로 넣어야 할 게시물 정보 가져옴
+	var posts []utils.Post = utils.GetParsedData(r.rss.url)
+	domainURL := getDomainURL(r.rss.url)
+	var lastIdxToUpdate int32 = utils.CheckUpdatedPost(posts, r.id, domainURL, r.rss.lastUpdated)
+	if lastIdxToUpdate < 0 {
+		utils.LogRun(r.name, postNumToUpdate, postNumUpdated)
+		return
+	}
+	postNumToUpdate = lastIdxToUpdate + 1
+
+	// grpc client streaming
+	if r.id == 0 {
+		logger.Info("starting gRPC client streaming")
+		postNumUpdated = insertPost_clientStreaming(stub, &posts, lastIdxToUpdate)
+	} else {
+		// grpc bidirectional streaming
+		logger.Info("starting gRPC bidirectional streaming")
+		postNumUpdated = insertPost_bidirectionalStreaming(stub, &posts, lastIdxToUpdate)
+	}
+
 	r.rss.lastUpdated = currentTime
-	return totalCount, successCount
+	utils.LogRun(r.name, postNumToUpdate, postNumUpdated)
 }

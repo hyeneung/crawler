@@ -1,0 +1,13 @@
+{"time":"2024-06-06T07:24:20.984997+09:00","level":"INFO","msg":"starting gRPC unary","crawlerId":0}
+{"time":"2024-06-06T07:24:21.0183862+09:00","level":"INFO","msg":"Init Done","crawler":"lineCrawler","db_log":"Succeed"}
+{"time":"2024-06-06T07:24:21.2685945+09:00","level":"INFO","msg":"starting gRPC client streaming","crawlerId":0}
+{"time":"2024-06-06T07:24:21.423543+09:00","level":"INFO","msg":"Done","crawler":"lineCrawler","results":{"newly posted":44,"updated":44}}
+{"time":"2024-06-06T07:24:21.423543+09:00","level":"INFO","msg":"starting gRPC unary","crawlerId":1}
+{"time":"2024-06-06T07:24:21.427986+09:00","level":"INFO","msg":"Init Done","crawler":"mercariCrawler","db_log":"Succeed"}
+{"time":"2024-06-06T07:24:22.0927633+09:00","level":"INFO","msg":"starting gRPC bidirectional streaming","crawlerId":1}
+{"time":"2024-06-06T07:24:22.4686719+09:00","level":"INFO","msg":"Done","crawler":"mercariCrawler","results":{"newly posted":100,"updated":100}}
+{"time":"2024-06-06T07:24:22.469176+09:00","level":"INFO","msg":"starting gRPC unary","crawlerId":2}
+{"time":"2024-06-06T07:24:22.4719353+09:00","level":"INFO","msg":"Init Done","crawler":"kurleyCrawler","db_log":"Succeed"}
+{"time":"2024-06-06T07:24:22.8620548+09:00","level":"INFO","msg":"starting gRPC bidirectional streaming","crawlerId":2}
+{"time":"2024-06-06T07:24:23.0375265+09:00","level":"INFO","msg":"Done","crawler":"kurleyCrawler","results":{"newly posted":43,"updated":43}}
+{"time":"2024-06-06T07:24:23.0375265+09:00","level":"INFO","msg":"starting gRPC server streaming"}
