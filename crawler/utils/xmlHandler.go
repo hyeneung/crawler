@@ -38,7 +38,6 @@ func CheckUpdatedPost(posts []Post, id uint64, domainURL string, updatedDate int
 	lastUpdatedDate := UnixTime2Time(updatedDate)
 	pathStartIdx := len("https://") + len(domainURL)
 
-	// goroutine 함수 정의
 	resultCh := make(chan int32)
 	worker := func(start, end int32) {
 		defer wg.Done()
@@ -62,7 +61,6 @@ func CheckUpdatedPost(posts []Post, id uint64, domainURL string, updatedDate int
 	// segmentSize = (numPosts//workerCount) + 1
 	segmentSize := (numPosts + workerCount - 1) / workerCount
 
-	// Launch workers
 	for i := int32(0); i < workerCount; i++ {
 		start := i * segmentSize
 		end := start + segmentSize
@@ -72,14 +70,11 @@ func CheckUpdatedPost(posts []Post, id uint64, domainURL string, updatedDate int
 		wg.Add(1)
 		go worker(start, end)
 	}
-
-	// Close the result channel when all workers are done
 	go func() {
 		wg.Wait()
 		close(resultCh)
 	}()
 
-	// Find the maximum index returned by workers
 	var maxIdx int32 = -1
 	for idx := range resultCh {
 		if idx > maxIdx {

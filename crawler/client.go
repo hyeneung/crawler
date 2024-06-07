@@ -105,7 +105,7 @@ func insertPost_bidirectionalStreaming(stub *pb.ResultInfoClient, posts *[]utils
 	utils.CheckErr(err, logger)
 
 	// goroutine(receiver)
-	c := make(chan uint32)
+	c := make(chan uint32, 10)
 	go receiveWorker(insertStream, c)
 
 	// goroutine(sender)
@@ -180,7 +180,6 @@ func main() {
 			rssCrawler.Run(&stub, time.Now().Unix()) // post DB에 게시물 정보 저장
 		}(uint64(i), c)
 	}
-	// Wait for all goroutines to finish
 	wg.Wait()
 
 	// grpc server streaming

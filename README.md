@@ -13,7 +13,7 @@
 1. 최소 기능 동작-rss feed를 DB에 저장 (완료)
 2. 학교 과제
     * [x] docker compose로 mysql, 크롤러 2개 서비스 구성.
-    * [x] main package에서 db package의 함수를 gRPC로 호출
+    * [x] gRPC로 crawler에서 db(handler)의 함수 호출. 4가지 방식 이용 
     * [ ] kubernetes 이용해서 cralwer pod과 db pod 실행
 3. 성능 개선
     * [x] 전체적으로 goroutine 적용해서 비동기처리
@@ -27,14 +27,12 @@
 ###  docker로 실행
 - https://github.com/hyeneung/crawler/tree/a8cf288694e468338426b4d56386ad25eb273265
 ### goroutine 적용기
-1. 하나의 프로그램 내. 크롤러 동작 비동기 처리
-     * [이전] main.go에서 한 회사의 블로그 정보를 다 저장해야 다른 회사꺼 DB에 저장
-2. 하나의 크롤러 내. 다른 DB들 insert 동작 비동기 처리
-     * [이전] domain DB에 insert한 후에야 post DB에 insert
-3. 하나의 DB 작업 내. 다른 instance(record)들 DB insert 동작 비동기 처리
-     * [이전] post DB에 이전 게시물 insert한 후에야 다음 게시물 insert
-     * insert 작업 성공 횟수를 공유해서 수정 하기에 동기화 문제 발생 가능.
-     * gRPC 쓰면서 goroutine 가능한지 확인할 것.
+1. 각 블로그 별 크롤러 동작 비동기 처리
+     * crawler/client.go/main
+2. DB에 새로 반영해야 할 게시물 확인. 확인해야 할 영역 나누어 비동기 처리
+     * crawler/utils/xmlHandler.go/CheckUpdatedPost
+3. gRPC streaming 함수들. 여러 개 보내는 동작, 받는 동작 비동기 처리. 
+     * crawler/client.go/  db/server.go/
 ## 고민한 것
 ### DB
 1. 스키마
@@ -46,7 +44,7 @@
       * 게시물 특성 상 한 번 넣으면 수정도 변경도 안되는 상황 -> 캐싱
  * primary key 무엇으로 할 것인가
     * 방법 1 : id 만들고 AUTO_INCREMENT
-      * DB 수준에서 중복 처리 못함. 추가 코드 필요 -> goroutine 동기화 문제 걱정됨.
+      * DB 수준에서 중복 처리 못함. 코드 레벨에서 처리 -> goroutine 동기화 처리해야. 병목 예상됨
     * 방법 2 : 크롤러id, pubDate(unix time)을 composite primary key로.
       * DB 기능 활용 가능
  * 최종 스키마
@@ -54,4 +52,4 @@
    *  post(crawler_id(PK, FK), url(PK), title, pubDate(nullable) )
       *  pubDate nullable인 이유 : RSS 파일에서 optional임 [참고]https://www.rssboard.org/rss-specification
 2. 트랜잭션 적용
- * 하나씩 insert만 하니까 트랜잭션 적용 시 db 성능 저하 우려
+ * 하나씩 insert만 하니까 트랜잭션 적용 시 db 성능 저하 우려되어 적용 안함

@@ -7,10 +7,19 @@ import (
 	"github.com/martinohmann/exit"
 )
 
-func DBLogMessage(crawlerId uint64, err error) string {
+func DBLogMessage(title string, crawlerId uint64, err error) string {
 	var message string
-	logger := SlogLogger.With(
-		slog.Uint64("crawler_id", crawlerId))
+	var logger *slog.Logger
+	if title == "" {
+		logger = SlogLogger.With(
+			slog.Uint64("crawler_id", crawlerId),
+		)
+	} else {
+		logger = SlogLogger.With(
+			slog.Uint64("crawler_id", crawlerId),
+			slog.String("title", title),
+		)
+	}
 	if err == nil {
 		message = "Succeed"
 		logger.Info(message)

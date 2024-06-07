@@ -27,7 +27,8 @@ type server struct {
 func (s *server) InsertDomain(ctx context.Context, in *pb.UnaryRequest) (*pb.Response, error) {
 	slog.Info("[Received] "+in.Url, "Id : ", in.Id)
 	err := utils.InsertDomainDB(in.Id, in.Url)
-	message := utils.DBLogMessage(in.Id, err) // log 남김
+	emptyString := ""
+	message := utils.DBLogMessage(emptyString, in.Id, err) // log 남김
 	return &pb.Response{Id: in.Id, Message: message}, err
 }
 
@@ -45,7 +46,7 @@ func (s *server) InsertPosts(stream pb.ResultInfo_InsertPostsServer) error {
 		}
 		slog.Info("[Received] "+post.Title, "Id : ", post.Id)
 		err = utils.InsertPostDB(post)
-		utils.DBLogMessage(post.Id, err)
+		utils.DBLogMessage(post.Title, post.Id, err)
 		if err == nil {
 			updatedCount += 1
 		} else {
@@ -124,7 +125,7 @@ func (s *server) InsertPosts_(stream pb.ResultInfo_InsertPosts_Server) error {
 
 	for post := range postChan {
 		err := utils.InsertPostDB(post)
-		message := utils.DBLogMessage(post.Id, err)
+		message := utils.DBLogMessage(post.Title, post.Id, err)
 		if err != nil {
 			close(errChan)
 			return err
