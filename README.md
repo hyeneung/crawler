@@ -3,10 +3,10 @@
   * 회사 상관 없이 제목으로 검색 가능하도록 DB구성, 검색 웹사이트 구축
 ### 프로젝트 전체 구성
 1. crawler
-- RSS feed 파일 바탕으로 게시물 크롤링
-- gRPC client. gRPC로 db(handler)의 insert 함수 호출
+   - RSS feed 파일 바탕으로 게시물 크롤링
+   - gRPC client. gRPC로 db(handler)의 insert 함수 호출
 2. db(handler)
-- gRPC server. 게시물 정보 받아 db에 insert
+   - gRPC server. 게시물 정보 받아 db에 insert
 3. 웹 사이트 운영
 * later
 ### 해야할 것(우선순위)

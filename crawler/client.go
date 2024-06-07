@@ -75,8 +75,8 @@ func saveServerLogs(stub *pb.ResultInfoClient) {
 
 	filePath := "./log/serverLog.log"
 	file, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
-	defer file.Close()
 	utils.CheckErr(err, utils.SlogLogger)
+	defer file.Close()
 
 	for {
 		logs, err := stream.Recv()
@@ -132,11 +132,13 @@ func insertPost_bidirectionalStreaming(stub *pb.ResultInfoClient, posts *[]utils
 func receiveWorker(streamPost pb.ResultInfo_InsertPosts_Client, c chan<- uint32) {
 	var successCount uint32 = 0
 	for {
-		_, err := streamPost.Recv()
+		res, err := streamPost.Recv()
 		if err == io.EOF {
 			break
 		}
-		successCount++
+		if res.Message == "Succeed" {
+			successCount++
+		}
 	}
 	c <- successCount
 }
@@ -176,8 +178,8 @@ func main() {
 		go func(id uint64, c crawlerInfo) {
 			defer wg.Done()
 			rssCrawler := New(id, c.name, c.rssURL)
-			rssCrawler.Init(&stub)                   // domain DB에 crawler id, domain url 저장
-			rssCrawler.Run(&stub, time.Now().Unix()) // post DB에 게시물 정보 저장
+			rssCrawler.Init(&stub)                   // domain table에 crawler id, domain url 저장
+			rssCrawler.Run(&stub, time.Now().Unix()) // post table에 게시물 정보 저장
 		}(uint64(i), c)
 	}
 	wg.Wait()

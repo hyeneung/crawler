@@ -32,7 +32,7 @@ func (s *server) InsertDomain(ctx context.Context, in *pb.UnaryRequest) (*pb.Res
 	return &pb.Response{Id: in.Id, Message: message}, err
 }
 
-// Client-side Streaming RPC
+// client streaming
 func (s *server) InsertPosts(stream pb.ResultInfo_InsertPostsServer) error {
 	var updatedCount uint32 = 0
 	for {
@@ -56,7 +56,7 @@ func (s *server) InsertPosts(stream pb.ResultInfo_InsertPostsServer) error {
 	}
 }
 
-// Server-side Streaming RPC
+// server streaming
 func (s *server) GetLogs(empty *emptypb.Empty, stream pb.ResultInfo_GetLogsServer) error {
 	dir := "./log"
 	files, err := os.ReadDir(dir)
@@ -98,7 +98,7 @@ func (s *server) GetLogs(empty *emptypb.Empty, stream pb.ResultInfo_GetLogsServe
 	return nil
 }
 
-// Bi-directional Streaming RPC
+// biddirectional streaming
 func (s *server) InsertPosts_(stream pb.ResultInfo_InsertPosts_Server) error {
 	var wg sync.WaitGroup
 	postChan := make(chan *pb.Post, 10)
