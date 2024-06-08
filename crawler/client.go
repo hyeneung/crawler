@@ -65,7 +65,7 @@ func insertPost_clientStreaming(stub *pb.ResultInfoClient, posts *[]utils.Post, 
 	return res.Value
 }
 
-// grpc server streaming
+// grpc server streaming(not using)
 func saveServerLogs(stub *pb.ResultInfoClient) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancel()
@@ -93,7 +93,7 @@ func saveServerLogs(stub *pb.ResultInfoClient) {
 	}
 }
 
-// grpc biddirectional streaming
+// grpc biddirectional streaming(not using)
 func insertPost_bidirectionalStreaming(stub *pb.ResultInfoClient, posts *[]utils.Post, lastIdxToUpdate int32) uint32 {
 	logger := utils.SlogLogger.With(
 		slog.Uint64("crawlerId", (*posts)[0].Id),
@@ -143,25 +143,15 @@ func receiveWorker(streamPost pb.ResultInfo_InsertPosts_Client, c chan<- uint32)
 	c <- successCount
 }
 
-type crawlerInfo struct {
-	name   string
-	rssURL string
-}
-
 const (
 	// https://github.com/grpc/grpc/blob/master/doc/naming.md
 	address = "dns:localhost:50051"
 )
 
 func main() {
-	const lineURL = "https://techblog.lycorp.co.jp/ko/feed/index.xml"
-	const mercariURL = "https://engineering.mercari.com/en/blog/feed.xml"
-	const kurlyURL = "https://helloworld.kurly.com/feed.xml"
-	var crawlerInfos = []crawlerInfo{
-		{name: "lineCrawler", rssURL: lineURL},
-		{name: "mercariCrawler", rssURL: mercariURL},
-		{name: "kurleyCrawler", rssURL: kurlyURL},
-	}
+	// rss 2.0 standards : https://www.rssboard.org/rss-specification
+	configFilePath := "./config-crawler.yaml"
+	config := getConfig(configFilePath)
 
 	slog.SetDefault(utils.SlogLogger)
 
@@ -173,19 +163,15 @@ func main() {
 	stub := pb.NewResultInfoClient(conn)
 
 	var wg sync.WaitGroup
-	for i, c := range crawlerInfos {
+	for i, c := range config.Crawlers {
 		wg.Add(1)
-		go func(id uint64, c crawlerInfo) {
+		go func(id uint64, crawler Crawler) {
 			defer wg.Done()
-			rssCrawler := New(id, c.name, c.rssURL)
-			rssCrawler.Init(&stub)                   // domain table에 crawler id, domain url 저장
-			rssCrawler.Run(&stub, time.Now().Unix()) // post table에 게시물 정보 저장
+			crawler.Init(&stub, &config) // domain table에 crawler id, domain url 저장
+			crawler.Run(&stub, &config)  // post table에 게시물 정보 저장
 		}(uint64(i), c)
 	}
 	wg.Wait()
-
-	// grpc server streaming
-	slog.Info("starting gRPC server streaming")
-	saveServerLogs(&stub)
-	slog.Info("finished gRPC server streaming")
+	writeConfig(configFilePath, config)
+	slog.Info("Successfully Finished")
 }

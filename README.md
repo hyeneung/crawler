@@ -14,19 +14,22 @@
 2. 학교 과제
     * [x] docker compose로 mysql, 크롤러 2개 서비스 구성.
     * [x] gRPC로 crawler에서 db(handler)의 함수 호출. 4가지 방식 이용 
-    * [ ] kubernetes 이용해서 cralwer pod과 db pod 실행
+    * [ ] kubernetes 이용해서 crawler pod과 db pod 만들어 통신
+         * crawler/db/mysql 컨테이너 만듦
+         * db, mysql은 같은 pod에. mysql volume 추가
+         * grpc_health_probe와 mysql health check 넣을 것
 3. 성능 개선
     * [x] 전체적으로 goroutine 적용해서 비동기처리
 4. 운영 측면 기능 추가
-    * [ ] 하루 단위로 프로그램 실행. 기술 블로그 업데이트 확인 및 반영 (linux crontab 적용)
-    * [ ] cmd로 xml path와 크롤러 이름, 크롤러 id 시작 번호 받아서 프로그램 수행
+    * [ ] 하루 단위로 프로그램 실행. 기술 블로그 업데이트 확인 및 반영 (linux crontab 적용 or k8s cronjob)
+    * [x] 설정 파일로 크롤러 정보 받아 프로그램 수행
 5. 서비스 완전성(방학때 웹 공부용)
     * [ ] rss feed가 제공하지 않는 예전 post 정보 크롤링. db 저장. 
     * [ ] 크롤링한 정보를 웹에 게시판 형식으로 게시. 원하는 내용 검색해서 볼 수 있도록.
-    * [ ] db 계정, 비번 정보 코드에서 빼서 따로 관리
+    * [ ] db 계정, 비번 정보 환경변수로 따로 관리
 ###  docker로 실행
 - https://github.com/hyeneung/crawler/tree/a8cf288694e468338426b4d56386ad25eb273265
-### goroutine 적용기
+### goroutine 적용
 1. 각 블로그 별 크롤러 동작 비동기 처리
      * crawler/client.go/main
 2. DB에 새로 반영해야 할 게시물 확인. 확인해야 할 영역 나누어 비동기 처리

@@ -5,35 +5,7 @@ import (
 	"crawler/utils"
 	"log/slog"
 	"strings"
-	"time"
 )
-
-// rss type
-// rss 2.0 standards : https://www.rssboard.org/rss-specification
-type rss struct {
-	url         string
-	lastUpdated int64
-}
-
-// RSSCrawler type
-type rssCrawler struct {
-	id   uint64
-	name string
-	rss  rss
-}
-
-// Constructor of RSSCrawler
-func New(_id uint64, _name string, _url string) *rssCrawler {
-	return &rssCrawler{
-		id:   _id,
-		name: _name,
-		rss: rss{
-			url:         _url,
-			lastUpdated: time.Date(2022, 6, 1, 0, 0, 0, 0, time.UTC).Unix(),
-			// lastUpdated: time.Now().Unix()
-		},
-	}
-}
 
 func getDomainURL(url string) string {
 	// "https://techblog.lycorp.co.jp/ko/migrate-mysql-with-read-only-mode"
@@ -42,47 +14,45 @@ func getDomainURL(url string) string {
 }
 
 // Init the crawler
-func (r *rssCrawler) Init(stub *service.ResultInfoClient) {
+func (r *Crawler) Init(stub *service.ResultInfoClient, config *Config) {
 	logger := utils.SlogLogger.With(
-		slog.Uint64("crawlerId", r.id),
+		slog.Uint64("crawlerId", r.ID),
 	)
-	domainURL := getDomainURL(r.rss.url)
+	logger.Info("starting Init")
+
+	i := getCrawlerIdx(*config, r.ID)
+	// 이미 domain table에 있는 경우
+	if config.Crawlers[i].Initialized {
+		logger.Info("Init Done")
+		return
+	}
+	domainURL := getDomainURL(r.RSS.URL)
 	// grpc unary
-	logger.Info("starting gRPC unary")
-	message := insertDomain(stub, r.id, domainURL)
-	logger.Info("finished gRPC unary")
-	utils.LogInit(message, r.name)
+	message := insertDomain(stub, r.ID, domainURL)
+	utils.LogInit(message, r.Name)
+	config.Crawlers[i].Initialized = true
 }
 
 // Run the crawler
-func (r *rssCrawler) Run(stub *service.ResultInfoClient, currentTime int64) {
+func (r *Crawler) Run(stub *service.ResultInfoClient, config *Config) {
 	logger := utils.SlogLogger.With(
-		slog.Uint64("crawlerId", r.id),
+		slog.Uint64("crawlerId", r.ID),
 	)
 	var postNumToUpdate int32 = 0
 	var postNumUpdated uint32 = 0
-	var posts []utils.Post = utils.GetParsedData(r.rss.url)
-	domainURL := getDomainURL(r.rss.url)
-	var lastIdxToUpdate int32 = utils.CheckUpdatedPost(posts, r.id, domainURL, r.rss.lastUpdated)
+	var posts []utils.Post = utils.GetParsedData(r.RSS.URL)
+	domainURL := getDomainURL(r.RSS.URL)
+	var lastIdxToUpdate int32 = utils.CheckUpdatedPost(posts, r.ID, domainURL, r.RSS.LastUpdated)
 	if lastIdxToUpdate < 0 {
-		utils.LogRun(r.name, postNumToUpdate, postNumUpdated)
+		utils.LogRun(r.Name, postNumToUpdate, postNumUpdated)
 		return
 	}
 	postNumToUpdate = lastIdxToUpdate + 1
 
-	// 데모용
-	if r.id == 0 {
-		// grpc client streaming
-		logger.Info("starting gRPC client streaming")
-		postNumUpdated = insertPost_clientStreaming(stub, &posts, lastIdxToUpdate)
-		logger.Info("finished gRPC client streaming")
-	} else {
-		// grpc bidirectional streaming
-		logger.Info("starting gRPC bidirectional streaming")
-		postNumUpdated = insertPost_bidirectionalStreaming(stub, &posts, lastIdxToUpdate)
-		logger.Info("finished gRPC bidirectional streaming")
-	}
+	// grpc client streaming
+	logger.Info("starting Update")
+	postNumUpdated = insertPost_clientStreaming(stub, &posts, lastIdxToUpdate)
 
-	r.rss.lastUpdated = currentTime
-	utils.LogRun(r.name, postNumToUpdate, postNumUpdated)
+	updateConfig(config, r.ID)
+	utils.LogRun(r.Name, postNumToUpdate, postNumUpdated)
 }

@@ -56,5 +56,5 @@ func LogRun(crawlerName string, totalCount int32, successCount uint32) {
 		),
 	)
 
-	resultLogger.Info("Done")
+	resultLogger.Info("Update Done")
 }
