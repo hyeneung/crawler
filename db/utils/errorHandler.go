@@ -29,6 +29,7 @@ func DBLogMessage(title string, crawlerId uint64, err error) string {
 	if mysqlErr == nil {
 		message = "[Failed] Not using MySQL"
 		logger.Error(message)
+		logger.Error(err.Error())
 		return message
 	}
 	switch mysqlErr.Number {

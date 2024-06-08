@@ -27,6 +27,12 @@ var SlogLogger = slog.New(
 
 func getLogFilePath() string {
 	logPath := "./log/"
+	if _, err := os.Stat(logPath); os.IsNotExist(err) {
+		err := os.Mkdir(logPath, 0700)
+		if err != nil {
+			log.Fatalln(err.Error())
+		}
+	}
 	logFileName := time.Now().Format("2006-01-01_15h04m05s") + ".log"
 	fileName := logPath + logFileName
 	if _, err := os.Stat(fileName); err != nil {

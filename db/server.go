@@ -16,6 +16,8 @@ import (
 	wrapper "github.com/golang/protobuf/ptypes/wrappers"
 	"github.com/martinohmann/exit"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/health"
+	"google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
@@ -159,10 +161,18 @@ func main() {
 		slog.Error(err.Error())
 		exit.Exit(err)
 	}
+
 	s := grpc.NewServer()
+	// 서버에 서비스 등록
+	healthServer := health.NewServer()
+	grpc_health_v1.RegisterHealthServer(s, healthServer)
 	pb.RegisterResultInfoServer(s, &server{})
+	// health status 를 변경
+	healthServer.SetServingStatus("", grpc_health_v1.HealthCheckResponse_SERVING)
+
+	slog.Info("server started successfully")
 	if err := s.Serve(lis); err != nil {
-		slog.Error(err.Error())
+		slog.Error("failed to serve: %v", err)
 		exit.Exit(err)
 	}
 }

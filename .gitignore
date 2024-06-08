@@ -1,4 +1,4 @@
-utils/db/data
+db/data
 
 # Binaries for programs and plugins
 *.exe

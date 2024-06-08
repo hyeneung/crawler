@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"db/service"
 	"fmt"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -12,14 +13,19 @@ type connectionInfo struct {
 	username string
 	password string
 	host     string
-	port     int
+	port     string
 	database string
 }
 
 func getConnection() *sql.DB {
-	// docker exec -it docker-crawler-1 /bin/bash   // host : "db"
-	info := connectionInfo{username: "root", password: "1234", host: "127.0.0.1", port: 3306, database: "crawl_data"}
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s", info.username, info.password, info.host, info.port, info.database)
+	info := connectionInfo{
+		username: os.Getenv("DB_USER"),
+		password: os.Getenv("DB_PASS"),
+		host:     os.Getenv("DB_HOST"),
+		port:     os.Getenv("DB_PORT"),
+		database: os.Getenv("DB_NAME"),
+	}
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", info.username, info.password, info.host, info.port, info.database)
 	conn, err := sql.Open("mysql", dsn)
 	checkFatalErr(err)
 	// conn.SetConnMaxLifetime(time.Minute * 3)

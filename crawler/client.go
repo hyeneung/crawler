@@ -143,17 +143,8 @@ func receiveWorker(streamPost pb.ResultInfo_InsertPosts_Client, c chan<- uint32)
 	c <- successCount
 }
 
-const (
-	// https://github.com/grpc/grpc/blob/master/doc/naming.md
-	address = "dns:localhost:50051"
-)
-
 func main() {
-	// rss 2.0 standards : https://www.rssboard.org/rss-specification
-	configFilePath := "./config-crawler.yaml"
-	config := getConfig(configFilePath)
-
-	slog.SetDefault(utils.SlogLogger)
+	address := os.Getenv("GRPC_SERVER_ADDRESS")
 
 	conn, err := grpc.NewClient(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
@@ -161,6 +152,11 @@ func main() {
 	}
 	defer conn.Close()
 	stub := pb.NewResultInfoClient(conn)
+
+	slog.SetDefault(utils.SlogLogger)
+	// rss 2.0 standards : https://www.rssboard.org/rss-specification
+	configFilePath := "./config-crawler.yaml"
+	config := getConfig(configFilePath)
 
 	var wg sync.WaitGroup
 	for i, c := range config.Crawlers {
