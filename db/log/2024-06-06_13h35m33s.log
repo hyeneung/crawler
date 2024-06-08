@@ -1,0 +1,452 @@
+{"time":"2024-06-08T13:35:33.890274635Z","level":"INFO","msg":"server starting"}
+{"time":"2024-06-08T13:35:33.891815977Z","level":"INFO","msg":"server started successfully"}
+{"time":"2024-06-08T13:35:39.945132869Z","level":"INFO","msg":"[Received] engineering.mercari.com","Id : ":1}
+{"time":"2024-06-08T13:35:39.945273232Z","level":"INFO","msg":"[Received] techblog.lycorp.co.jp","Id : ":0}
+{"time":"2024-06-08T13:35:39.945161796Z","level":"INFO","msg":"[Received] helloworld.kurly.com","Id : ":2}
+{"time":"2024-06-08T13:35:39.966601877Z","level":"INFO","msg":"Succeed","crawler_id":2}
+{"time":"2024-06-08T13:35:39.967831123Z","level":"INFO","msg":"Succeed","crawler_id":0}
+{"time":"2024-06-08T13:35:39.967838808Z","level":"INFO","msg":"Succeed","crawler_id":1}
+{"time":"2024-06-08T13:35:40.2706692Z","level":"INFO","msg":"[Received] LY Tech Blog에서 FY23 회고를 진행합니다","Id : ":0}
+{"time":"2024-06-08T13:35:40.275795415Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"LY Tech Blog에서 FY23 회고를 진행합니다"}
+{"time":"2024-06-08T13:35:40.27616825Z","level":"INFO","msg":"[Received] Req-Saver로 캐시의 골칫거리 'Thundering Herd 문제' 쉽게 풀기!","Id : ":0}
+{"time":"2024-06-08T13:35:40.28070753Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"Req-Saver로 캐시의 골칫거리 'Thundering Herd 문제' 쉽게 풀기!"}
+{"time":"2024-06-08T13:35:40.281194656Z","level":"INFO","msg":"[Received] LINE 개발자를 위한 오프라인 밋업, Push&Pull","Id : ":0}
+{"time":"2024-06-08T13:35:40.286426117Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"LINE 개발자를 위한 오프라인 밋업, Push&Pull"}
+{"time":"2024-06-08T13:35:40.286875891Z","level":"INFO","msg":"[Received] LINE Android 앱에 폰트 커스터마이징 기능 적용하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.294058694Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"LINE Android 앱에 폰트 커스터마이징 기능 적용하기"}
+{"time":"2024-06-08T13:35:40.294586623Z","level":"INFO","msg":"[Received] 플랫폼 팀의 1년, 일본 최대 규모의 배달 서비스에 안착하기까지 ","Id : ":0}
+{"time":"2024-06-08T13:35:40.296412808Z","level":"INFO","msg":"[Received] Welcome to 마켓컬리!","Id : ":2}
+{"time":"2024-06-08T13:35:40.30231391Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"플랫폼 팀의 1년, 일본 최대 규모의 배달 서비스에 안착하기까지 "}
+{"time":"2024-06-08T13:35:40.30274578Z","level":"INFO","msg":"[Received] LINE SHOPPING JP, 글로벌 협업 프로세스 개선 회고","Id : ":0}
+{"time":"2024-06-08T13:35:40.302968204Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Welcome to 마켓컬리!"}
+{"time":"2024-06-08T13:35:40.303495744Z","level":"INFO","msg":"[Received] BULK 처리 Write에 집중해서 개선해보기","Id : ":2}
+{"time":"2024-06-08T13:35:40.308033342Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"BULK 처리 Write에 집중해서 개선해보기"}
+{"time":"2024-06-08T13:35:40.308741418Z","level":"INFO","msg":"[Received] 컬리로그팀이 직접 고객을 만나고 리서치를 진행한 이야기: 컬리 푸드 페스타에서","Id : ":2}
+{"time":"2024-06-08T13:35:40.308352802Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"LINE SHOPPING JP, 글로벌 협업 프로세스 개선 회고"}
+{"time":"2024-06-08T13:35:40.309441312Z","level":"INFO","msg":"[Received] HeadVer - 기민한 프로덕트 팀을 위한 새로운 버저닝 시스템","Id : ":0}
+{"time":"2024-06-08T13:35:40.314160981Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"HeadVer - 기민한 프로덕트 팀을 위한 새로운 버저닝 시스템"}
+{"time":"2024-06-08T13:35:40.314733656Z","level":"INFO","msg":"[Received] 보이지 않는 로직, 읽을 수 있는 문서로 만들기!","Id : ":0}
+{"time":"2024-06-08T13:35:40.314428338Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리로그팀이 직접 고객을 만나고 리서치를 진행한 이야기: 컬리 푸드 페스타에서"}
+{"time":"2024-06-08T13:35:40.315660106Z","level":"INFO","msg":"[Received] 고객에게 뚜렷한 경험을: 컬리의 후기 이미지 처리 기술","Id : ":2}
+{"time":"2024-06-08T13:35:40.320031384Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"보이지 않는 로직, 읽을 수 있는 문서로 만들기!"}
+{"time":"2024-06-08T13:35:40.320548997Z","level":"INFO","msg":"[Received] 질문에 대처하는 어느 플랫폼 개발자의 이야기","Id : ":0}
+{"time":"2024-06-08T13:35:40.320242274Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"고객에게 뚜렷한 경험을: 컬리의 후기 이미지 처리 기술"}
+{"time":"2024-06-08T13:35:40.321224686Z","level":"INFO","msg":"[Received] 서비스 기획자의 뷰티컬리로 확장하기","Id : ":2}
+{"time":"2024-06-08T13:35:40.325620684Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"질문에 대처하는 어느 플랫폼 개발자의 이야기"}
+{"time":"2024-06-08T13:35:40.32610074Z","level":"INFO","msg":"[Received] 오픈소스 ABC User Feedback에 적용한 모노리포 구조 소개","Id : ":0}
+{"time":"2024-06-08T13:35:40.325796091Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"서비스 기획자의 뷰티컬리로 확장하기"}
+{"time":"2024-06-08T13:35:40.326780448Z","level":"INFO","msg":"[Received] 퀵메뉴로 비즈니스 널리 알리기 (feat. 전지적 디자이너 시점)","Id : ":2}
+{"time":"2024-06-08T13:35:40.330906741Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"오픈소스 ABC User Feedback에 적용한 모노리포 구조 소개"}
+{"time":"2024-06-08T13:35:40.331301999Z","level":"INFO","msg":"[Received] HBase 오픈소스 전환을 위한 HBH(HitBase Handler) 개발기","Id : ":0}
+{"time":"2024-06-08T13:35:40.332684285Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"퀵메뉴로 비즈니스 널리 알리기 (feat. 전지적 디자이너 시점)"}
+{"time":"2024-06-08T13:35:40.333131663Z","level":"INFO","msg":"[Received] 컬리가 상품을 고객에게 빠르게 전달하는 똑똑한 방법","Id : ":2}
+{"time":"2024-06-08T13:35:40.336368692Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"HBase 오픈소스 전환을 위한 HBH(HitBase Handler) 개발기"}
+{"time":"2024-06-08T13:35:40.336762957Z","level":"INFO","msg":"[Received] 읽기 전용 설정으로 MySQL 이전하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.338308412Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리가 상품을 고객에게 빠르게 전달하는 똑똑한 방법"}
+{"time":"2024-06-08T13:35:40.338862789Z","level":"INFO","msg":"[Received] 컬리 개발자들의 내돈내산 제품 찐추천 - 사실 컬리 개발자들은 회사에 월급을 반납하고 있습니다.","Id : ":2}
+{"time":"2024-06-08T13:35:40.341698014Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"읽기 전용 설정으로 MySQL 이전하기"}
+{"time":"2024-06-08T13:35:40.342119157Z","level":"INFO","msg":"[Received] 오프라인과 온라인 A/B 테스트를 통해 오픈챗 추천 모델 개선하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.344133455Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리 개발자들의 내돈내산 제품 찐추천 - 사실 컬리 개발자들은 회사에 월급을 반납하고 있습니다."}
+{"time":"2024-06-08T13:35:40.344508894Z","level":"INFO","msg":"[Received] 함께 구매하면 좋은 상품이에요! - 장바구니 추천 개발기 1부","Id : ":2}
+{"time":"2024-06-08T13:35:40.346678698Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"오프라인과 온라인 A/B 테스트를 통해 오픈챗 추천 모델 개선하기"}
+{"time":"2024-06-08T13:35:40.347011632Z","level":"INFO","msg":"[Received] 실시간 추천 서비스를 위해 메시지 큐잉 도입하기(with Redis Streams)","Id : ":0}
+{"time":"2024-06-08T13:35:40.349405843Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"함께 구매하면 좋은 상품이에요! - 장바구니 추천 개발기 1부"}
+{"time":"2024-06-08T13:35:40.349796321Z","level":"INFO","msg":"[Received] 후기 서비스 AWS Opensearch 도입기","Id : ":2}
+{"time":"2024-06-08T13:35:40.351711931Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"실시간 추천 서비스를 위해 메시지 큐잉 도입하기(with Redis Streams)"}
+{"time":"2024-06-08T13:35:40.352050456Z","level":"INFO","msg":"[Received] 물 흐르듯 자연스러운 화면 전환을 향한 여정","Id : ":0}
+{"time":"2024-06-08T13:35:40.354478409Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"후기 서비스 AWS Opensearch 도입기"}
+{"time":"2024-06-08T13:35:40.354794676Z","level":"INFO","msg":"[Received] 헤이조이스 웨비나를 소개합니다","Id : ":2}
+{"time":"2024-06-08T13:35:40.357515089Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"물 흐르듯 자연스러운 화면 전환을 향한 여정"}
+{"time":"2024-06-08T13:35:40.357956176Z","level":"INFO","msg":"[Received] 문서 작성 및 관리 노하우를 알리는 행사, Technical Documentation Day 참석 후기","Id : ":0}
+{"time":"2024-06-08T13:35:40.361118873Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"헤이조이스 웨비나를 소개합니다"}
+{"time":"2024-06-08T13:35:40.361523091Z","level":"INFO","msg":"[Received] 스크럼, 입고팀이 애자일하게 일하는 법 1부","Id : ":2}
+{"time":"2024-06-08T13:35:40.365492923Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"문서 작성 및 관리 노하우를 알리는 행사, Technical Documentation Day 참석 후기"}
+{"time":"2024-06-08T13:35:40.365889313Z","level":"INFO","msg":"[Received] 우선순위에 시달리다 공식을 만들었다","Id : ":0}
+{"time":"2024-06-08T13:35:40.367818648Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"스크럼, 입고팀이 애자일하게 일하는 법 1부"}
+{"time":"2024-06-08T13:35:40.368270618Z","level":"INFO","msg":"[Received] 팀을 더욱 유연하게 만들어가는 힘","Id : ":2}
+{"time":"2024-06-08T13:35:40.371803864Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"우선순위에 시달리다 공식을 만들었다"}
+{"time":"2024-06-08T13:35:40.372266032Z","level":"INFO","msg":"[Received] 이커머스 플랫폼의 주문 DB 마이그레이션 경험기","Id : ":0}
+{"time":"2024-06-08T13:35:40.37382719Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"팀을 더욱 유연하게 만들어가는 힘"}
+{"time":"2024-06-08T13:35:40.37434671Z","level":"INFO","msg":"[Received] 함께 구매하면 좋은 상품이에요! - 장바구니 추천 개발기 2부","Id : ":2}
+{"time":"2024-06-08T13:35:40.379059562Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"함께 구매하면 좋은 상품이에요! - 장바구니 추천 개발기 2부"}
+{"time":"2024-06-08T13:35:40.379405169Z","level":"INFO","msg":"[Received] 풀필먼트 입고 서비스팀에서 분산락을 사용하는 방법 - Spring Redisson","Id : ":2}
+{"time":"2024-06-08T13:35:40.382553356Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"이커머스 플랫폼의 주문 DB 마이그레이션 경험기"}
+{"time":"2024-06-08T13:35:40.38295992Z","level":"INFO","msg":"[Received] 린트 적용으로 코드 대량 변경 시 AST를 이용해 검증하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.384190923Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"풀필먼트 입고 서비스팀에서 분산락을 사용하는 방법 - Spring Redisson"}
+{"time":"2024-06-08T13:35:40.384540159Z","level":"INFO","msg":"[Received] 2022년 2월 마켓컬리 개발자 밋업 후기","Id : ":2}
+{"time":"2024-06-08T13:35:40.387620954Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"린트 적용으로 코드 대량 변경 시 AST를 이용해 검증하기"}
+{"time":"2024-06-08T13:35:40.38803982Z","level":"INFO","msg":"[Received] 쿠버네티스 네이티브 워크플로를 이용한 대용량 스트리밍 파이프라인 검증 자동화 - 3편","Id : ":0}
+{"time":"2024-06-08T13:35:40.389925078Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"2022년 2월 마켓컬리 개발자 밋업 후기"}
+{"time":"2024-06-08T13:35:40.390406763Z","level":"INFO","msg":"[Received] 뷰티컬리에서 <나의 컬리 스타일>이 갖는 의미","Id : ":2}
+{"time":"2024-06-08T13:35:40.392902412Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"쿠버네티스 네이티브 워크플로를 이용한 대용량 스트리밍 파이프라인 검증 자동화 - 3편"}
+{"time":"2024-06-08T13:35:40.393553604Z","level":"INFO","msg":"[Received] 쿠버네티스 네이티브 워크플로를 이용한 대용량 스트리밍 파이프라인 검증 자동화 - 1편","Id : ":0}
+{"time":"2024-06-08T13:35:40.394971197Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"뷰티컬리에서 <나의 컬리 스타일>이 갖는 의미"}
+{"time":"2024-06-08T13:35:40.395287812Z","level":"INFO","msg":"[Received] 컬리에서 데이터 분석가로 일한다는 것","Id : ":2}
+{"time":"2024-06-08T13:35:40.399328938Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"쿠버네티스 네이티브 워크플로를 이용한 대용량 스트리밍 파이프라인 검증 자동화 - 1편"}
+{"time":"2024-06-08T13:35:40.399914728Z","level":"INFO","msg":"[Received] 대규모 Redis를 운영하며 살아남기","Id : ":0}
+{"time":"2024-06-08T13:35:40.401218438Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리에서 데이터 분석가로 일한다는 것"}
+{"time":"2024-06-08T13:35:40.401826628Z","level":"INFO","msg":"[Received] 뷰티 필터를 개발하며 얻은 새로운 경험","Id : ":2}
+{"time":"2024-06-08T13:35:40.406880332Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"대규모 Redis를 운영하며 살아남기"}
+{"time":"2024-06-08T13:35:40.407399104Z","level":"INFO","msg":"[Received] 가상 머신의 성능을 높이는 것도 지구 온난화에 도움이 될까요?","Id : ":0}
+{"time":"2024-06-08T13:35:40.408596541Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"뷰티 필터를 개발하며 얻은 새로운 경험"}
+{"time":"2024-06-08T13:35:40.409512703Z","level":"INFO","msg":"[Received] 우리는 왜 공통 라이브러리를 만들기 시작했나","Id : ":2}
+{"time":"2024-06-08T13:35:40.413510434Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"가상 머신의 성능을 높이는 것도 지구 온난화에 도움이 될까요?"}
+{"time":"2024-06-08T13:35:40.413933124Z","level":"INFO","msg":"[Received] 모두가 행복해지는 API 문서 통합과 자동화","Id : ":0}
+{"time":"2024-06-08T13:35:40.415411204Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"우리는 왜 공통 라이브러리를 만들기 시작했나"}
+{"time":"2024-06-08T13:35:40.415830645Z","level":"INFO","msg":"[Received] DevOps팀의 Terraform 모험","Id : ":2}
+{"time":"2024-06-08T13:35:40.423776733Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"모두가 행복해지는 API 문서 통합과 자동화"}
+{"time":"2024-06-08T13:35:40.42479866Z","level":"INFO","msg":"[Received] 5년간 첫 삽만 5번 뜬 오픈소스 ABC User Feedback 궤도에 오르기까지","Id : ":0}
+{"time":"2024-06-08T13:35:40.426124793Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"DevOps팀의 Terraform 모험"}
+{"time":"2024-06-08T13:35:40.427304723Z","level":"INFO","msg":"[Received] 컬리는 물류 최적화 문제를 어떻게 풀고 있을까? - 2부","Id : ":2}
+{"time":"2024-06-08T13:35:40.433894307Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"5년간 첫 삽만 5번 뜬 오픈소스 ABC User Feedback 궤도에 오르기까지"}
+{"time":"2024-06-08T13:35:40.434273941Z","level":"INFO","msg":"[Received] 오픈소스답게 소프트웨어 설계하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.438598308Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리는 물류 최적화 문제를 어떻게 풀고 있을까? - 2부"}
+{"time":"2024-06-08T13:35:40.439000574Z","level":"INFO","msg":"[Received] Kurly만의 MLOps 구축하기 - 쿠브플로우 도입기","Id : ":2}
+{"time":"2024-06-08T13:35:40.44094202Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"오픈소스답게 소프트웨어 설계하기"}
+{"time":"2024-06-08T13:35:40.441376643Z","level":"INFO","msg":"[Received] 개발자가 손수 대규모 Cassandra를 신규 클러스터로 이전하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.446742589Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Kurly만의 MLOps 구축하기 - 쿠브플로우 도입기"}
+{"time":"2024-06-08T13:35:40.447307104Z","level":"INFO","msg":"[Received] 카트 개발 연대기","Id : ":2}
+{"time":"2024-06-08T13:35:40.447426603Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"개발자가 손수 대규모 Cassandra를 신규 클러스터로 이전하기"}
+{"time":"2024-06-08T13:35:40.448168278Z","level":"INFO","msg":"[Received] Jetpack Compose로 LINE 앱 Yahoo!검색 모듈 개발하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.45342988Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"카트 개발 연대기"}
+{"time":"2024-06-08T13:35:40.453988072Z","level":"INFO","msg":"[Received] KURLY 현직자가 직접 뽑은 직무별 핵심 키워드를 소개합니다!","Id : ":2}
+{"time":"2024-06-08T13:35:40.453890109Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"Jetpack Compose로 LINE 앱 Yahoo!검색 모듈 개발하기"}
+{"time":"2024-06-08T13:35:40.455935793Z","level":"INFO","msg":"[Received] 메모리 모델 입문 - Sequential Consistency와 Total Store Order 이해하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.459829155Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"KURLY 현직자가 직접 뽑은 직무별 핵심 키워드를 소개합니다!"}
+{"time":"2024-06-08T13:35:40.460263883Z","level":"INFO","msg":"[Received] DDD와 MSA 기반으로 좋은 서비스 개발하기","Id : ":2}
+{"time":"2024-06-08T13:35:40.46302881Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"메모리 모델 입문 - Sequential Consistency와 Total Store Order 이해하기"}
+{"time":"2024-06-08T13:35:40.463447933Z","level":"INFO","msg":"[Received] 실전! Spring Boot 3 마이그레이션","Id : ":0}
+{"time":"2024-06-08T13:35:40.466880785Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"DDD와 MSA 기반으로 좋은 서비스 개발하기"}
+{"time":"2024-06-08T13:35:40.467166402Z","level":"INFO","msg":"[Received] 후기 개선 프로젝트가 끝이 아닌 시작인 이유","Id : ":2}
+{"time":"2024-06-08T13:35:40.470036785Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"실전! Spring Boot 3 마이그레이션"}
+{"time":"2024-06-08T13:35:40.470506773Z","level":"INFO","msg":"[Received] Flutter에서 커스텀 린트 활용하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.47485764Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"후기 개선 프로젝트가 끝이 아닌 시작인 이유"}
+{"time":"2024-06-08T13:35:40.475234805Z","level":"INFO","msg":"[Received] Kurly만의 MLOps 구축하기 - 초석 다지기","Id : ":2}
+{"time":"2024-06-08T13:35:40.477512994Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"Flutter에서 커스텀 린트 활용하기"}
+{"time":"2024-06-08T13:35:40.4780479Z","level":"INFO","msg":"[Received] 너, 블로그 저자가 돼라! 블로그 스터디 운영 후기","Id : ":0}
+{"time":"2024-06-08T13:35:40.481833234Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Kurly만의 MLOps 구축하기 - 초석 다지기"}
+{"time":"2024-06-08T13:35:40.482327584Z","level":"INFO","msg":"[Received] 왜 폴 그레이엄은 회사 이름을 Y Combinator라고 지었을까","Id : ":2}
+{"time":"2024-06-08T13:35:40.485455446Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"너, 블로그 저자가 돼라! 블로그 스터디 운영 후기"}
+{"time":"2024-06-08T13:35:40.486031549Z","level":"INFO","msg":"[Received] Flutter 전환의 마침표 - 일본 1위 배달 앱, 세 번째 Recode","Id : ":0}
+{"time":"2024-06-08T13:35:40.4951794Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"왜 폴 그레이엄은 회사 이름을 Y Combinator라고 지었을까"}
+{"time":"2024-06-08T13:35:40.495830432Z","level":"INFO","msg":"[Received] 두근두근 컬리의 면접, 팀에서 성장하기","Id : ":2}
+{"time":"2024-06-08T13:35:40.497036096Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"Flutter 전환의 마침표 - 일본 1위 배달 앱, 세 번째 Recode"}
+{"time":"2024-06-08T13:35:40.497567965Z","level":"INFO","msg":"[Received] Vector를 활용해 멀티 CDN 로그 및 트래픽 관리하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.50408498Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"두근두근 컬리의 면접, 팀에서 성장하기"}
+{"time":"2024-06-08T13:35:40.50496184Z","level":"INFO","msg":"[Received] 컬리는 물류 최적화 문제를 어떻게 풀고 있을까? - 1부","Id : ":2}
+{"time":"2024-06-08T13:35:40.506327779Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"Vector를 활용해 멀티 CDN 로그 및 트래픽 관리하기"}
+{"time":"2024-06-08T13:35:40.506699558Z","level":"INFO","msg":"[Received] Jira의 이슈 정렬 방식이 Integer 방식이 아니라고?!","Id : ":0}
+{"time":"2024-06-08T13:35:40.512521118Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리는 물류 최적화 문제를 어떻게 풀고 있을까? - 1부"}
+{"time":"2024-06-08T13:35:40.512976368Z","level":"INFO","msg":"[Received] 우당탕탕 beauty 풀한, 컬리 앱 서비스 런칭기","Id : ":2}
+{"time":"2024-06-08T13:35:40.512703292Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"Jira의 이슈 정렬 방식이 Integer 방식이 아니라고?!"}
+{"time":"2024-06-08T13:35:40.514030976Z","level":"INFO","msg":"[Received] 프런트엔드 영역에서 FileReader를 이용해 MP4 파일 내 오디오 존재 여부 확인하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.519197268Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"우당탕탕 beauty 풀한, 컬리 앱 서비스 런칭기"}
+{"time":"2024-06-08T13:35:40.519628146Z","level":"INFO","msg":"[Received] 내가 만든 API를 널리 알리기 - Spring REST Docs 가이드편","Id : ":2}
+{"time":"2024-06-08T13:35:40.520823127Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"프런트엔드 영역에서 FileReader를 이용해 MP4 파일 내 오디오 존재 여부 확인하기"}
+{"time":"2024-06-08T13:35:40.521509147Z","level":"INFO","msg":"[Received] 전통적인 CMS에서 LandPress Content로 CMS를 옮기는 이유","Id : ":0}
+{"time":"2024-06-08T13:35:40.526718077Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"내가 만든 API를 널리 알리기 - Spring REST Docs 가이드편"}
+{"time":"2024-06-08T13:35:40.527092784Z","level":"INFO","msg":"[Received] 신규 서비스 배포 전에 실험과 개선을 반복한 이야기","Id : ":2}
+{"time":"2024-06-08T13:35:40.528532824Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"전통적인 CMS에서 LandPress Content로 CMS를 옮기는 이유"}
+{"time":"2024-06-08T13:35:40.529109566Z","level":"INFO","msg":"[Received] Ansible과 Rundeck을 활용한 서버 작업 자동화 및 권한 제어","Id : ":0}
+{"time":"2024-06-08T13:35:40.532747953Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"신규 서비스 배포 전에 실험과 개선을 반복한 이야기"}
+{"time":"2024-06-08T13:35:40.533180219Z","level":"INFO","msg":"[Received] Kurly Design Principle","Id : ":2}
+{"time":"2024-06-08T13:35:40.535568924Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"Ansible과 Rundeck을 활용한 서버 작업 자동화 및 권한 제어"}
+{"time":"2024-06-08T13:35:40.540867755Z","level":"INFO","msg":"[Received] ChatOps를 통한 업무 자동화(feat. Slack Hubot)","Id : ":0}
+{"time":"2024-06-08T13:35:40.545203047Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Kurly Design Principle"}
+{"time":"2024-06-08T13:35:40.545796938Z","level":"INFO","msg":"[Received] Dataflow로 컬리의 준실시간 수요 예측모델 파이프라인 구축하기 - 1편","Id : ":2}
+{"time":"2024-06-08T13:35:40.548161972Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"ChatOps를 통한 업무 자동화(feat. Slack Hubot)"}
+{"time":"2024-06-08T13:35:40.548840657Z","level":"INFO","msg":"[Received] 쿠버네티스 네이티브 워크플로를 이용한 대용량 스트리밍 파이프라인 검증 자동화 - 2편","Id : ":0}
+{"time":"2024-06-08T13:35:40.551915742Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Dataflow로 컬리의 준실시간 수요 예측모델 파이프라인 구축하기 - 1편"}
+{"time":"2024-06-08T13:35:40.552542848Z","level":"INFO","msg":"[Received] 컬리에서 선물하기를 개발하며 회고","Id : ":2}
+{"time":"2024-06-08T13:35:40.557379545Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"쿠버네티스 네이티브 워크플로를 이용한 대용량 스트리밍 파이프라인 검증 자동화 - 2편"}
+{"time":"2024-06-08T13:35:40.557974811Z","level":"INFO","msg":"[Received] 기술 문서 사이트로 Docusaurus 활용하기","Id : ":0}
+{"time":"2024-06-08T13:35:40.559593953Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리에서 선물하기를 개발하며 회고"}
+{"time":"2024-06-08T13:35:40.56005554Z","level":"INFO","msg":"[Received] 우리가 실행해 본 팀원 모두 함께 할 수 있는 팀 빌딩 게임 3가지","Id : ":2}
+{"time":"2024-06-08T13:35:40.564024577Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"기술 문서 사이트로 Docusaurus 활용하기"}
+{"time":"2024-06-08T13:35:40.564600696Z","level":"INFO","msg":"[Received] LINE 앱에서 음성 품질을 측정하는 방법","Id : ":0}
+{"time":"2024-06-08T13:35:40.566617384Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"우리가 실행해 본 팀원 모두 함께 할 수 있는 팀 빌딩 게임 3가지"}
+{"time":"2024-06-08T13:35:40.567069521Z","level":"INFO","msg":"[Received] 지난 9개월간의 딜리버리프로덕트팀의 경험과 변화에 대한 이야기: 애자일","Id : ":2}
+{"time":"2024-06-08T13:35:40.576553904Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"LINE 앱에서 음성 품질을 측정하는 방법"}
+{"time":"2024-06-08T13:35:40.577155247Z","level":"INFO","msg":"[Received] LINE 앱의 잡음 제거 기술 성능 측정 방법","Id : ":0}
+{"time":"2024-06-08T13:35:40.578260889Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"지난 9개월간의 딜리버리프로덕트팀의 경험과 변화에 대한 이야기: 애자일"}
+{"time":"2024-06-08T13:35:40.578890737Z","level":"INFO","msg":"[Received] React 이해하기","Id : ":2}
+{"time":"2024-06-08T13:35:40.587051125Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"LINE 앱의 잡음 제거 기술 성능 측정 방법"}
+{"time":"2024-06-08T13:35:40.587474733Z","level":"INFO","msg":"[Received] 사용자의 피드백을 잘 관리하고 활용하기 위한 서비스, ABC User Feedback","Id : ":0}
+{"time":"2024-06-08T13:35:40.587612682Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"React 이해하기"}
+{"time":"2024-06-08T13:35:40.590735907Z","level":"INFO","msg":"[Received] 컬리 공통 암호화 모듈의 동시성 이슈 해결하기","Id : ":2}
+{"time":"2024-06-08T13:35:40.595051201Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"사용자의 피드백을 잘 관리하고 활용하기 위한 서비스, ABC User Feedback"}
+{"time":"2024-06-08T13:35:40.595769663Z","level":"INFO","msg":"[Received] 1,100km 떨어져 있는 사용자를 위한 UX 리서치부터 과감한 리뉴얼까지의 기록","Id : ":0}
+{"time":"2024-06-08T13:35:40.597635648Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리 공통 암호화 모듈의 동시성 이슈 해결하기"}
+{"time":"2024-06-08T13:35:40.598436324Z","level":"INFO","msg":"[Received] JPA 덕분에 DB에서 삽질한 이야기","Id : ":2}
+{"time":"2024-06-08T13:35:40.602841985Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"1,100km 떨어져 있는 사용자를 위한 UX 리서치부터 과감한 리뉴얼까지의 기록"}
+{"time":"2024-06-08T13:35:40.603228878Z","level":"INFO","msg":"[Received] LINE과 Yahoo! JAPAN이 만나 함께 새로운 기술 블로그를 시작했습니다!","Id : ":0}
+{"time":"2024-06-08T13:35:40.636253304Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"JPA 덕분에 DB에서 삽질한 이야기"}
+{"time":"2024-06-08T13:35:40.63657588Z","level":"INFO","msg":"[Received] 6시간 동안 단체로 해외 콘퍼런스 참여하기: 프로덕트콘 같이 보기 이벤트 - ProductCon London 2023","Id : ":2}
+{"time":"2024-06-08T13:35:40.650159707Z","level":"INFO","msg":"Succeed","crawler_id":0,"title":"LINE과 Yahoo! JAPAN이 만나 함께 새로운 기술 블로그를 시작했습니다!"}
+{"time":"2024-06-08T13:35:40.655974228Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"6시간 동안 단체로 해외 콘퍼런스 참여하기: 프로덕트콘 같이 보기 이벤트 - ProductCon London 2023"}
+{"time":"2024-06-08T13:35:40.656387847Z","level":"INFO","msg":"[Received] KURLY HACK FESTA 2022 개최기를 소개합니다.","Id : ":2}
+{"time":"2024-06-08T13:35:40.661374421Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"KURLY HACK FESTA 2022 개최기를 소개합니다."}
+{"time":"2024-06-08T13:35:40.66203902Z","level":"INFO","msg":"[Received] Lambda Calculus에 대해 알아보자","Id : ":2}
+{"time":"2024-06-08T13:35:40.667446556Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Lambda Calculus에 대해 알아보자"}
+{"time":"2024-06-08T13:35:40.668078424Z","level":"INFO","msg":"[Received] TestContainers로 유저시나리오와 비슷한 통합테스트 만들어 보기","Id : ":2}
+{"time":"2024-06-08T13:35:40.673771137Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"TestContainers로 유저시나리오와 비슷한 통합테스트 만들어 보기"}
+{"time":"2024-06-08T13:35:40.674086269Z","level":"INFO","msg":"[Received] 새로운 컬리몰 NX를 소개합니다.","Id : ":2}
+{"time":"2024-06-08T13:35:40.680746152Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"새로운 컬리몰 NX를 소개합니다."}
+{"time":"2024-06-08T13:35:40.681164232Z","level":"INFO","msg":"[Received] 코드 악취를 맡는 후각 훈련의 시간","Id : ":2}
+{"time":"2024-06-08T13:35:40.686019224Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"코드 악취를 맡는 후각 훈련의 시간"}
+{"time":"2024-06-08T13:35:40.686348683Z","level":"INFO","msg":"[Received] 컬리의 BigQuery 도입기 - 2부","Id : ":2}
+{"time":"2024-06-08T13:35:40.691193596Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리의 BigQuery 도입기 - 2부"}
+{"time":"2024-06-08T13:35:40.691603484Z","level":"INFO","msg":"[Received] 컬리 검색이 카프카를 들여다본 이야기 2","Id : ":2}
+{"time":"2024-06-08T13:35:40.696778841Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리 검색이 카프카를 들여다본 이야기 2"}
+{"time":"2024-06-08T13:35:40.697295075Z","level":"INFO","msg":"[Received] Database Driven Development에서 진짜 DDD로의 선회, 이벤트 스토밍 -2-","Id : ":2}
+{"time":"2024-06-08T13:35:40.702247034Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Database Driven Development에서 진짜 DDD로의 선회, 이벤트 스토밍 -2-"}
+{"time":"2024-06-08T13:35:40.702659184Z","level":"INFO","msg":"[Received] 컬리 커머스플랫폼의 개발문화를 만들어가는 사람들","Id : ":2}
+{"time":"2024-06-08T13:35:40.720852118Z","level":"INFO","msg":"[Received] Introducing the Materials and Videos of Mercari&#8217;s 2024 New Graduate Engineer Training &#8220;DevDojo&#8221; !","Id : ":1}
+{"time":"2024-06-08T13:35:40.754681455Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Introducing the Materials and Videos of Mercari&#8217;s 2024 New Graduate Engineer Training &#8220;DevDojo&#8221; !"}
+{"time":"2024-06-08T13:35:40.755089986Z","level":"INFO","msg":"[Received] LLM-based Approach to Large-scale Item Category Classification","Id : ":1}
+{"time":"2024-06-08T13:35:40.754681395Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리 커머스플랫폼의 개발문화를 만들어가는 사람들"}
+{"time":"2024-06-08T13:35:40.755915198Z","level":"INFO","msg":"[Received] 컬리 검색이 카프카를 들여다본 이야기 1","Id : ":2}
+{"time":"2024-06-08T13:35:40.760503095Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"LLM-based Approach to Large-scale Item Category Classification"}
+{"time":"2024-06-08T13:35:40.761900466Z","level":"INFO","msg":"[Received] Flow Control Challenges in Mercari&#8217;s LINE Integration","Id : ":1}
+{"time":"2024-06-08T13:35:40.760607752Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리 검색이 카프카를 들여다본 이야기 1"}
+{"time":"2024-06-08T13:35:40.762531138Z","level":"INFO","msg":"[Received] PHP Development Roadmap In 2020 At Kurly","Id : ":2}
+{"time":"2024-06-08T13:35:40.76694938Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Flow Control Challenges in Mercari&#8217;s LINE Integration"}
+{"time":"2024-06-08T13:35:40.767354241Z","level":"INFO","msg":"[Received] Mercari’s Adoption of Modern Testing Techniques","Id : ":1}
+{"time":"2024-06-08T13:35:40.767123238Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"PHP Development Roadmap In 2020 At Kurly"}
+{"time":"2024-06-08T13:35:40.767950118Z","level":"INFO","msg":"[Received] 컬리의 BigQuery 도입기 - 1부","Id : ":2}
+{"time":"2024-06-08T13:35:40.772691503Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari’s Adoption of Modern Testing Techniques"}
+{"time":"2024-06-08T13:35:40.773132894Z","level":"INFO","msg":"[Received] FinOps at Mercari","Id : ":1}
+{"time":"2024-06-08T13:35:40.772831767Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리의 BigQuery 도입기 - 1부"}
+{"time":"2024-06-08T13:35:40.773791371Z","level":"INFO","msg":"[Received] 마켓컬리에서의 PHP 이야기","Id : ":2}
+{"time":"2024-06-08T13:35:40.778236017Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"FinOps at Mercari"}
+{"time":"2024-06-08T13:35:40.778627113Z","level":"INFO","msg":"[Received] An Introduction to Reverse Engineering for eBPF Bytecode","Id : ":1}
+{"time":"2024-06-08T13:35:40.778415115Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"마켓컬리에서의 PHP 이야기"}
+{"time":"2024-06-08T13:35:40.779315429Z","level":"INFO","msg":"[Received] 스크럼, 입고팀이 애자일하게 일하는 법 2부","Id : ":2}
+{"time":"2024-06-08T13:35:40.78424821Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"An Introduction to Reverse Engineering for eBPF Bytecode"}
+{"time":"2024-06-08T13:35:40.784483475Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"스크럼, 입고팀이 애자일하게 일하는 법 2부"}
+{"time":"2024-06-08T13:35:40.784988632Z","level":"INFO","msg":"[Received] AWS MLOps 분산학습 워크숍 방문기","Id : ":2}
+{"time":"2024-06-08T13:35:40.784658005Z","level":"INFO","msg":"[Received] Tortoise: Outpacing the Optimization Challenges in Kubernetes at Mercari","Id : ":1}
+{"time":"2024-06-08T13:35:40.790051254Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"AWS MLOps 분산학습 워크숍 방문기"}
+{"time":"2024-06-08T13:35:40.79046257Z","level":"INFO","msg":"[Received] 신규입사자가 바로보는 마켓컬리","Id : ":2}
+{"time":"2024-06-08T13:35:40.790324114Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Tortoise: Outpacing the Optimization Challenges in Kubernetes at Mercari"}
+{"time":"2024-06-08T13:35:40.791380105Z","level":"INFO","msg":"[Received] Quality at Speed: Empowering Marketplace Engineering Teams to achieve our QA Mission","Id : ":1}
+{"time":"2024-06-08T13:35:40.795668884Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"신규입사자가 바로보는 마켓컬리"}
+{"time":"2024-06-08T13:35:40.796080111Z","level":"INFO","msg":"[Received] 컬리, IEEM 2022에서 물류센터 생산 계획 최적화 논문을 발표하다","Id : ":2}
+{"time":"2024-06-08T13:35:40.800285458Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Quality at Speed: Empowering Marketplace Engineering Teams to achieve our QA Mission"}
+{"time":"2024-06-08T13:35:40.800725014Z","level":"INFO","msg":"[Received] On Reviewing Employee Accesses Managed Through Okta","Id : ":1}
+{"time":"2024-06-08T13:35:40.801832379Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"컬리, IEEM 2022에서 물류센터 생산 계획 최적화 논문을 발표하다"}
+{"time":"2024-06-08T13:35:40.802146788Z","level":"INFO","msg":"[Received] 데일리 스크럼 : '데일리 스크럼'을 더 잘하기 위한 생각","Id : ":2}
+{"time":"2024-06-08T13:35:40.807376429Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"On Reviewing Employee Accesses Managed Through Okta"}
+{"time":"2024-06-08T13:35:40.80775322Z","level":"INFO","msg":"[Received] Cost-Effective Strategy for Migrating Service Logs to BigQuery | SRE Intern Blog","Id : ":1}
+{"time":"2024-06-08T13:35:40.810121858Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"데일리 스크럼 : '데일리 스크럼'을 더 잘하기 위한 생각"}
+{"time":"2024-06-08T13:35:40.810457491Z","level":"INFO","msg":"[Received] AWS Sagemaker Ground Truth로 훈련용 이미지를 편하게 분류하자","Id : ":2}
+{"time":"2024-06-08T13:35:40.812699352Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Cost-Effective Strategy for Migrating Service Logs to BigQuery | SRE Intern Blog"}
+{"time":"2024-06-08T13:35:40.813057712Z","level":"INFO","msg":"[Received] Renovate Web E2E tests with Playwright Runner","Id : ":1}
+{"time":"2024-06-08T13:35:40.815361021Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"AWS Sagemaker Ground Truth로 훈련용 이미지를 편하게 분류하자"}
+{"time":"2024-06-08T13:35:40.815864682Z","level":"INFO","msg":"[Received] 데이터사이언스팀이 예측모델을 개발하고 운영하는 방법을 소개합니다.","Id : ":2}
+{"time":"2024-06-08T13:35:40.818188099Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Renovate Web E2E tests with Playwright Runner"}
+{"time":"2024-06-08T13:35:40.818475944Z","level":"INFO","msg":"[Received] Fine-Tuned CLIP: Better Listing Experience and 80% More Budget-Friendly","Id : ":1}
+{"time":"2024-06-08T13:35:40.820734795Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"데이터사이언스팀이 예측모델을 개발하고 운영하는 방법을 소개합니다."}
+{"time":"2024-06-08T13:35:40.821102428Z","level":"INFO","msg":"[Received] Datadog Dash 2022 컨퍼런스 방문기","Id : ":2}
+{"time":"2024-06-08T13:35:40.823574564Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Fine-Tuned CLIP: Better Listing Experience and 80% More Budget-Friendly"}
+{"time":"2024-06-08T13:35:40.823925087Z","level":"INFO","msg":"[Received] Making of &#8220;Your Mercari History&#8221;","Id : ":1}
+{"time":"2024-06-08T13:35:40.826017855Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Datadog Dash 2022 컨퍼런스 방문기"}
+{"time":"2024-06-08T13:35:40.826481902Z","level":"INFO","msg":"[Received] Slack Block Kit 활용","Id : ":2}
+{"time":"2024-06-08T13:35:40.828651394Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Making of &#8220;Your Mercari History&#8221;"}
+{"time":"2024-06-08T13:35:40.829058983Z","level":"INFO","msg":"[Received] LM-based query categorization for query understanding","Id : ":1}
+{"time":"2024-06-08T13:35:40.83136492Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Slack Block Kit 활용"}
+{"time":"2024-06-08T13:35:40.831661459Z","level":"INFO","msg":"[Received] 잘못 작성된 람다 코드를 삭제하기까지의 여정","Id : ":2}
+{"time":"2024-06-08T13:35:40.833936504Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"LM-based query categorization for query understanding"}
+{"time":"2024-06-08T13:35:40.834303844Z","level":"INFO","msg":"[Received] Leveraging LLMs in Production: Looking Back, Going Forward","Id : ":1}
+{"time":"2024-06-08T13:35:40.836672012Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"잘못 작성된 람다 코드를 삭제하기까지의 여정"}
+{"time":"2024-06-08T13:35:40.837017237Z","level":"INFO","msg":"[Received] BDD로 테스트에 중독되어 보자","Id : ":2}
+{"time":"2024-06-08T13:35:40.839673742Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Leveraging LLMs in Production: Looking Back, Going Forward"}
+{"time":"2024-06-08T13:35:40.840158277Z","level":"INFO","msg":"[Received] Mercari Hack Fest #7 : Introducing the Winners!","Id : ":1}
+{"time":"2024-06-08T13:35:40.841812248Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"BDD로 테스트에 중독되어 보자"}
+{"time":"2024-06-08T13:35:40.842632638Z","level":"INFO","msg":"[Received] 새로 입사한 개발자가 프로젝트에 기여하는 방법 한 가지","Id : ":2}
+{"time":"2024-06-08T13:35:40.849047826Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari Hack Fest #7 : Introducing the Winners!"}
+{"time":"2024-06-08T13:35:40.849452248Z","level":"INFO","msg":"[Received] The Frontend Infrastructure Monorepo","Id : ":1}
+{"time":"2024-06-08T13:35:40.849786874Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"새로 입사한 개발자가 프로젝트에 기여하는 방법 한 가지"}
+{"time":"2024-06-08T13:35:40.850392645Z","level":"INFO","msg":"[Received] DevOps 엔지니어의 Redis Test 분투기 - Part 1","Id : ":2}
+{"time":"2024-06-08T13:35:40.854986476Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"The Frontend Infrastructure Monorepo"}
+{"time":"2024-06-08T13:35:40.855273994Z","level":"INFO","msg":"[Received] Current Microservices Status, Challenges, and the Golden Path","Id : ":1}
+{"time":"2024-06-08T13:35:40.855360707Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"DevOps 엔지니어의 Redis Test 분투기 - Part 1"}
+{"time":"2024-06-08T13:35:40.856197136Z","level":"INFO","msg":"[Received] 들어는 보았나 몹 프로그래밍!","Id : ":2}
+{"time":"2024-06-08T13:35:40.860709301Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Current Microservices Status, Challenges, and the Golden Path"}
+{"time":"2024-06-08T13:35:40.861179388Z","level":"INFO","msg":"[Received] In search of a knowledge management silver bullet","Id : ":1}
+{"time":"2024-06-08T13:35:40.86089023Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"들어는 보았나 몹 프로그래밍!"}
+{"time":"2024-06-08T13:35:40.862130157Z","level":"INFO","msg":"[Received] Kurly에서 주문을 모니터링 하는 법","Id : ":2}
+{"time":"2024-06-08T13:35:40.866569992Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"In search of a knowledge management silver bullet"}
+{"time":"2024-06-08T13:35:40.866965371Z","level":"INFO","msg":"[Received] TnS Platform Team, past, present, and future","Id : ":1}
+{"time":"2024-06-08T13:35:40.866806647Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Kurly에서 주문을 모니터링 하는 법"}
+{"time":"2024-06-08T13:35:40.867805278Z","level":"INFO","msg":"[Received] Database Driven Development에서 진짜 DDD로의 선회 -1-","Id : ":2}
+{"time":"2024-06-08T13:35:40.872294622Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"TnS Platform Team, past, present, and future"}
+{"time":"2024-06-08T13:35:40.87262423Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"Database Driven Development에서 진짜 DDD로의 선회 -1-"}
+{"time":"2024-06-08T13:35:40.873092348Z","level":"INFO","msg":"[Received] 기술 블로그를 다시 디자인하며","Id : ":2}
+{"time":"2024-06-08T13:35:40.872716397Z","level":"INFO","msg":"[Received] t9n, i18n, l10n, g11n?!","Id : ":1}
+{"time":"2024-06-08T13:35:40.902937371Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"기술 블로그를 다시 디자인하며"}
+{"time":"2024-06-08T13:35:40.904238269Z","level":"INFO","msg":"[Received] 개발자들이 꺼려하는 까칠한 규식이 형","Id : ":2}
+{"time":"2024-06-08T13:35:40.905739688Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"t9n, i18n, l10n, g11n?!"}
+{"time":"2024-06-08T13:35:40.906093854Z","level":"INFO","msg":"[Received] Leading a team of lead engineers","Id : ":1}
+{"time":"2024-06-08T13:35:40.909117845Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"개발자들이 꺼려하는 까칠한 규식이 형"}
+{"time":"2024-06-08T13:35:40.909421526Z","level":"INFO","msg":"[Received] 마켓컬리 서비스 구조를 소개 합니다","Id : ":2}
+{"time":"2024-06-08T13:35:40.911296833Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Leading a team of lead engineers"}
+{"time":"2024-06-08T13:35:40.91185172Z","level":"INFO","msg":"[Received] Understanding and Modernizing a Legacy Codebase","Id : ":1}
+{"time":"2024-06-08T13:35:40.914625626Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"마켓컬리 서비스 구조를 소개 합니다"}
+{"time":"2024-06-08T13:35:40.914962396Z","level":"INFO","msg":"[Received] 쿠폰과 할인으로 앞다리살 하나 더 판매한 이야기","Id : ":2}
+{"time":"2024-06-08T13:35:40.916367917Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Understanding and Modernizing a Legacy Codebase"}
+{"time":"2024-06-08T13:35:40.916737151Z","level":"INFO","msg":"[Received] Enhancing Collaboration and Reliability: The Journey of Version History in our Page Editor Tool","Id : ":1}
+{"time":"2024-06-08T13:35:40.919732861Z","level":"INFO","msg":"Succeed","crawler_id":2,"title":"쿠폰과 할인으로 앞다리살 하나 더 판매한 이야기"}
+{"time":"2024-06-08T13:35:40.921388535Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Enhancing Collaboration and Reliability: The Journey of Version History in our Page Editor Tool"}
+{"time":"2024-06-08T13:35:40.921645877Z","level":"INFO","msg":"[Received] The art of streamlining mobile app releases","Id : ":1}
+{"time":"2024-06-08T13:35:40.925630011Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"The art of streamlining mobile app releases"}
+{"time":"2024-06-08T13:35:40.92589913Z","level":"INFO","msg":"[Received] Designing iOS Screen Navigation for Best UX","Id : ":1}
+{"time":"2024-06-08T13:35:40.930090563Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Designing iOS Screen Navigation for Best UX"}
+{"time":"2024-06-08T13:35:40.930343457Z","level":"INFO","msg":"[Received] Moving to cloud: How to do Migrations the wrong way","Id : ":1}
+{"time":"2024-06-08T13:35:40.934468881Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Moving to cloud: How to do Migrations the wrong way"}
+{"time":"2024-06-08T13:35:40.934780715Z","level":"INFO","msg":"[Received] The Spirit of Giving: A Year-End Roundup of Our Open Source Contributions","Id : ":1}
+{"time":"2024-06-08T13:35:40.939109153Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"The Spirit of Giving: A Year-End Roundup of Our Open Source Contributions"}
+{"time":"2024-06-08T13:35:40.939465643Z","level":"INFO","msg":"[Received] Mercari&#8217;s Journey Integrating AI &#038; Search at Berlin Buzzwords 2023","Id : ":1}
+{"time":"2024-06-08T13:35:40.943698545Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari&#8217;s Journey Integrating AI &#038; Search at Berlin Buzzwords 2023"}
+{"time":"2024-06-08T13:35:40.943983921Z","level":"INFO","msg":"[Received] Performance monitoring in Mercari mobile apps","Id : ":1}
+{"time":"2024-06-08T13:35:40.947836234Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Performance monitoring in Mercari mobile apps"}
+{"time":"2024-06-08T13:35:40.948147358Z","level":"INFO","msg":"[Received] Mercari QA and Compose for Android automation","Id : ":1}
+{"time":"2024-06-08T13:35:40.952250247Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari QA and Compose for Android automation"}
+{"time":"2024-06-08T13:35:40.952532218Z","level":"INFO","msg":"[Received] How we reduced response latency by over 80%","Id : ":1}
+{"time":"2024-06-08T13:35:40.956732729Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"How we reduced response latency by over 80%"}
+{"time":"2024-06-08T13:35:40.957083855Z","level":"INFO","msg":"[Received] BigQuery Unleashed: A Guide to Performance, Data Management and Cost Optimization","Id : ":1}
+{"time":"2024-06-08T13:35:40.961465583Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"BigQuery Unleashed: A Guide to Performance, Data Management and Cost Optimization"}
+{"time":"2024-06-08T13:35:40.961784094Z","level":"INFO","msg":"[Received] How We Saved 75% of our Server Costs","Id : ":1}
+{"time":"2024-06-08T13:35:40.965860063Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"How We Saved 75% of our Server Costs"}
+{"time":"2024-06-08T13:35:40.966171307Z","level":"INFO","msg":"[Received] Mercari India : The story of Mercari Group’s first ever Global Center of Excellence","Id : ":1}
+{"time":"2024-06-08T13:35:40.970409067Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari India : The story of Mercari Group’s first ever Global Center of Excellence"}
+{"time":"2024-06-08T13:35:40.970687325Z","level":"INFO","msg":"[Received] The new Mercari Master API","Id : ":1}
+{"time":"2024-06-08T13:35:40.974751256Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"The new Mercari Master API"}
+{"time":"2024-06-08T13:35:40.97503369Z","level":"INFO","msg":"[Received] Mercari Group CTO talks on the ideal “Global Company and Developer Experience&#8221;","Id : ":1}
+{"time":"2024-06-08T13:35:40.97924672Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari Group CTO talks on the ideal “Global Company and Developer Experience&#8221;"}
+{"time":"2024-06-08T13:35:40.979536474Z","level":"INFO","msg":"[Received] The Bitter Lesson about Engineers in a ChatGPT World","Id : ":1}
+{"time":"2024-06-08T13:35:40.983996734Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"The Bitter Lesson about Engineers in a ChatGPT World"}
+{"time":"2024-06-08T13:35:40.984324892Z","level":"INFO","msg":"[Received] What the Merpay Enabling Client Team aims for","Id : ":1}
+{"time":"2024-06-08T13:35:40.988951374Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"What the Merpay Enabling Client Team aims for"}
+{"time":"2024-06-08T13:35:40.989252661Z","level":"INFO","msg":"[Received] Merging Teams for a Growth Platform","Id : ":1}
+{"time":"2024-06-08T13:35:40.993446384Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Merging Teams for a Growth Platform"}
+{"time":"2024-06-08T13:35:40.993769288Z","level":"INFO","msg":"[Received] Mercari Advent Calendar 2023 is coming up!","Id : ":1}
+{"time":"2024-06-08T13:35:40.998913819Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari Advent Calendar 2023 is coming up!"}
+{"time":"2024-06-08T13:35:40.999227427Z","level":"INFO","msg":"[Received] Towards the new Product &amp; Engineering at Merpay &#8211; 5th anniversary edition","Id : ":1}
+{"time":"2024-06-08T13:35:41.003455163Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Towards the new Product &amp; Engineering at Merpay &#8211; 5th anniversary edition"}
+{"time":"2024-06-08T13:35:41.003788837Z","level":"INFO","msg":"[Received] Reducing Inter-Zone Egress Costs with Zone-Aware Routing in Mercari&#8217;s Kubernetes Clusters","Id : ":1}
+{"time":"2024-06-08T13:35:41.008289713Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Reducing Inter-Zone Egress Costs with Zone-Aware Routing in Mercari&#8217;s Kubernetes Clusters"}
+{"time":"2024-06-08T13:35:41.008613622Z","level":"INFO","msg":"[Received] Do We Need Engineers in a ChatGPT World?","Id : ":1}
+{"time":"2024-06-08T13:35:41.013020048Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Do We Need Engineers in a ChatGPT World?"}
+{"time":"2024-06-08T13:35:41.01332003Z","level":"INFO","msg":"[Received] Exploring the possibility of Istio Ingress Gateway","Id : ":1}
+{"time":"2024-06-08T13:35:41.02026022Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Exploring the possibility of Istio Ingress Gateway"}
+{"time":"2024-06-08T13:35:41.020562026Z","level":"INFO","msg":"[Received] Putting the Voice of Customers into the Software Development Process","Id : ":1}
+{"time":"2024-06-08T13:35:41.025084978Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Putting the Voice of Customers into the Software Development Process"}
+{"time":"2024-06-08T13:35:41.025450502Z","level":"INFO","msg":"[Received] 2023 GopherCon Review","Id : ":1}
+{"time":"2024-06-08T13:35:41.030205615Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"2023 GopherCon Review"}
+{"time":"2024-06-08T13:35:41.030607742Z","level":"INFO","msg":"[Received] Seamless critical traffic migration with CoreDNS request rewrite feature","Id : ":1}
+{"time":"2024-06-08T13:35:41.035329286Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Seamless critical traffic migration with CoreDNS request rewrite feature"}
+{"time":"2024-06-08T13:35:41.035694139Z","level":"INFO","msg":"[Received] x86 is dead, long live x86!","Id : ":1}
+{"time":"2024-06-08T13:35:41.040322132Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"x86 is dead, long live x86!"}
+{"time":"2024-06-08T13:35:41.040693519Z","level":"INFO","msg":"[Received] Merpay Actionable History &#8211; Displaying Millions of Payments with Lightning Speed","Id : ":1}
+{"time":"2024-06-08T13:35:41.045494882Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Merpay Actionable History &#8211; Displaying Millions of Payments with Lightning Speed"}
+{"time":"2024-06-08T13:35:41.045877179Z","level":"INFO","msg":"[Received] Knowledge sharing problems and practices","Id : ":1}
+{"time":"2024-06-08T13:35:41.050387919Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Knowledge sharing problems and practices"}
+{"time":"2024-06-08T13:35:41.050738609Z","level":"INFO","msg":"[Received] How to Build a Go Program without Using go build","Id : ":1}
+{"time":"2024-06-08T13:35:41.054984818Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"How to Build a Go Program without Using go build"}
+{"time":"2024-06-08T13:35:41.05532037Z","level":"INFO","msg":"[Received] My journey from an SWE Intern at Mercari JP to SWE at Mercari India","Id : ":1}
+{"time":"2024-06-08T13:35:41.060004602Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"My journey from an SWE Intern at Mercari JP to SWE at Mercari India"}
+{"time":"2024-06-08T13:35:41.060437317Z","level":"INFO","msg":"[Received] Ten Tips to Improve Your Technical Writing","Id : ":1}
+{"time":"2024-06-08T13:35:41.064881765Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Ten Tips to Improve Your Technical Writing"}
+{"time":"2024-06-08T13:35:41.065347817Z","level":"INFO","msg":"[Received] The importance of role definitions in an organization","Id : ":1}
+{"time":"2024-06-08T13:35:41.069956089Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"The importance of role definitions in an organization"}
+{"time":"2024-06-08T13:35:41.070313751Z","level":"INFO","msg":"[Received] Mercari’s passkey adoption","Id : ":1}
+{"time":"2024-06-08T13:35:41.074982324Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari’s passkey adoption"}
+{"time":"2024-06-08T13:35:41.075333722Z","level":"INFO","msg":"[Received] Mimicking a Holographic Effect for Mercard","Id : ":1}
+{"time":"2024-06-08T13:35:41.0799681Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mimicking a Holographic Effect for Mercard"}
+{"time":"2024-06-08T13:35:41.080345353Z","level":"INFO","msg":"[Received] Benchmarking Automation to Maintain Search Response Performance","Id : ":1}
+{"time":"2024-06-08T13:35:41.085125796Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Benchmarking Automation to Maintain Search Response Performance"}
+{"time":"2024-06-08T13:35:41.085422192Z","level":"INFO","msg":"[Received] MERCARI HACK FEST 2022 : UNLIMITED HACKTIVITY TO UNLOCK HIDDEN POTENTIALS #MercariHackFest","Id : ":1}
+{"time":"2024-06-08T13:35:41.090086452Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"MERCARI HACK FEST 2022 : UNLIMITED HACKTIVITY TO UNLOCK HIDDEN POTENTIALS #MercariHackFest"}
+{"time":"2024-06-08T13:35:41.090458863Z","level":"INFO","msg":"[Received] Web Design System: Migrating Web Components To React","Id : ":1}
+{"time":"2024-06-08T13:35:41.095014558Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Web Design System: Migrating Web Components To React"}
+{"time":"2024-06-08T13:35:41.095323433Z","level":"INFO","msg":"[Received] Leverage Kotlin in your Android CI","Id : ":1}
+{"time":"2024-06-08T13:35:41.099788278Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Leverage Kotlin in your Android CI"}
+{"time":"2024-06-08T13:35:41.100086937Z","level":"INFO","msg":"[Received] Surveys, Survey Fatigue and getting Feedback","Id : ":1}
+{"time":"2024-06-08T13:35:41.104784461Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Surveys, Survey Fatigue and getting Feedback"}
+{"time":"2024-06-08T13:35:41.105088128Z","level":"INFO","msg":"[Received] Restructuring the Kubernetes Threat Matrix and Evaluating Attack Detection by Falco","Id : ":1}
+{"time":"2024-06-08T13:35:41.110142857Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Restructuring the Kubernetes Threat Matrix and Evaluating Attack Detection by Falco"}
+{"time":"2024-06-08T13:35:41.110461743Z","level":"INFO","msg":"[Received] Implementing Elasticsearch CPU usage based auto scaling","Id : ":1}
+{"time":"2024-06-08T13:35:41.115263489Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Implementing Elasticsearch CPU usage based auto scaling"}
+{"time":"2024-06-08T13:35:41.115686495Z","level":"INFO","msg":"[Received] Attempt to improve item recommendation accuracy using Item2vec","Id : ":1}
+{"time":"2024-06-08T13:35:41.122250734Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Attempt to improve item recommendation accuracy using Item2vec"}
+{"time":"2024-06-08T13:35:41.122605325Z","level":"INFO","msg":"[Received] Building secure web apps using Web Workers","Id : ":1}
+{"time":"2024-06-08T13:35:41.12774782Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Building secure web apps using Web Workers"}
+{"time":"2024-06-08T13:35:41.128207131Z","level":"INFO","msg":"[Received] Bucket full of secrets &#8211; Terraform exfiltration","Id : ":1}
+{"time":"2024-06-08T13:35:41.133395231Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Bucket full of secrets &#8211; Terraform exfiltration"}
+{"time":"2024-06-08T13:35:41.133877251Z","level":"INFO","msg":"[Received] Validation of the Price Estimation Model using data from Mercari Shops | Souzoh Intern","Id : ":1}
+{"time":"2024-06-08T13:35:41.138978778Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Validation of the Price Estimation Model using data from Mercari Shops | Souzoh Intern"}
+{"time":"2024-06-08T13:35:41.139384394Z","level":"INFO","msg":"[Received] Mercari India Backend Team Intro Video at First-Ever Online Meet-Up!","Id : ":1}
+{"time":"2024-06-08T13:35:41.144467131Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari India Backend Team Intro Video at First-Ever Online Meet-Up!"}
+{"time":"2024-06-08T13:35:41.144913155Z","level":"INFO","msg":"[Received] Closing the visual testing gap on Android with screenshot tests","Id : ":1}
+{"time":"2024-06-08T13:35:41.150326637Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Closing the visual testing gap on Android with screenshot tests"}
+{"time":"2024-06-08T13:35:41.150769043Z","level":"INFO","msg":"[Received] Showcasing “DevDojo,” a Series of Mercari-Developed Learning Content for Engineering","Id : ":1}
+{"time":"2024-06-08T13:35:41.156074787Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Showcasing “DevDojo,” a Series of Mercari-Developed Learning Content for Engineering"}
+{"time":"2024-06-08T13:35:41.156431794Z","level":"INFO","msg":"[Received] Applying OAuth 2.0 and OIDC to first-party services","Id : ":1}
+{"time":"2024-06-08T13:35:41.16140638Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Applying OAuth 2.0 and OIDC to first-party services"}
+{"time":"2024-06-08T13:35:41.161820591Z","level":"INFO","msg":"[Received] Fraud, How do we handle it ?","Id : ":1}
+{"time":"2024-06-08T13:35:41.168003253Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Fraud, How do we handle it ?"}
+{"time":"2024-06-08T13:35:41.168481822Z","level":"INFO","msg":"[Received] Introducing Swift Concurrency to Merpay code","Id : ":1}
+{"time":"2024-06-08T13:35:41.177899774Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Introducing Swift Concurrency to Merpay code"}
+{"time":"2024-06-08T13:35:41.178471022Z","level":"INFO","msg":"[Received] Mercari Ranked #1 in Developer Experience Branding Ranking at “Developer eXperience AWARD 2023” for two years in a row","Id : ":1}
+{"time":"2024-06-08T13:35:41.184411226Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari Ranked #1 in Developer Experience Branding Ranking at “Developer eXperience AWARD 2023” for two years in a row"}
+{"time":"2024-06-08T13:35:41.184865033Z","level":"INFO","msg":"[Received] Organizing a Successful Internal Hackathon: Mercari Hack Fest Spring 2023","Id : ":1}
+{"time":"2024-06-08T13:35:41.192313042Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Organizing a Successful Internal Hackathon: Mercari Hack Fest Spring 2023"}
+{"time":"2024-06-08T13:35:41.192664858Z","level":"INFO","msg":"[Received] New Materials and Videos from Mercari&#8217;s 2023 DevDojo Now Available!","Id : ":1}
+{"time":"2024-06-08T13:35:41.200006658Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"New Materials and Videos from Mercari&#8217;s 2023 DevDojo Now Available!"}
+{"time":"2024-06-08T13:35:41.200579859Z","level":"INFO","msg":"[Received] The Art of the Security Double Play: How Mercari Combines Internal Audits and Custom CodeQL Queries to Keep Systems Safe","Id : ":1}
+{"time":"2024-06-08T13:35:41.207240319Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"The Art of the Security Double Play: How Mercari Combines Internal Audits and Custom CodeQL Queries to Keep Systems Safe"}
+{"time":"2024-06-08T13:35:41.207598851Z","level":"INFO","msg":"[Received] SIG-Scheduling Deep Dive (Kubecon Recap)","Id : ":1}
+{"time":"2024-06-08T13:35:41.213578722Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"SIG-Scheduling Deep Dive (Kubecon Recap)"}
+{"time":"2024-06-08T13:35:41.213955767Z","level":"INFO","msg":"[Received] Improving Item Recommendation Accuracy Using Collaborative Filtering and Vector Search Engine","Id : ":1}
+{"time":"2024-06-08T13:35:41.218992749Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Improving Item Recommendation Accuracy Using Collaborative Filtering and Vector Search Engine"}
+{"time":"2024-06-08T13:35:41.219387756Z","level":"INFO","msg":"[Received] Resilient Retry and Recovery Mechanism: Enhancing Fault Tolerance and System Reliability","Id : ":1}
+{"time":"2024-06-08T13:35:41.224349386Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Resilient Retry and Recovery Mechanism: Enhancing Fault Tolerance and System Reliability"}
+{"time":"2024-06-08T13:35:41.224788183Z","level":"INFO","msg":"[Received] Capturing and applying knowledge through a personal knowledge management practice","Id : ":1}
+{"time":"2024-06-08T13:35:41.230167415Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Capturing and applying knowledge through a personal knowledge management practice"}
+{"time":"2024-06-08T13:35:41.230623309Z","level":"INFO","msg":"[Received] Model management for client side ML powered by Firebase","Id : ":1}
+{"time":"2024-06-08T13:35:41.236083914Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Model management for client side ML powered by Firebase"}
+{"time":"2024-06-08T13:35:41.236555816Z","level":"INFO","msg":"[Received] Mercari Hack Fest : Unlimited Hacktivity &#8211; The Result!","Id : ":1}
+{"time":"2024-06-08T13:35:41.241802448Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari Hack Fest : Unlimited Hacktivity &#8211; The Result!"}
+{"time":"2024-06-08T13:35:41.242226497Z","level":"INFO","msg":"[Received] Look back of Mercari Engineering 2022","Id : ":1}
+{"time":"2024-06-08T13:35:41.248030614Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Look back of Mercari Engineering 2022"}
+{"time":"2024-06-08T13:35:41.248483843Z","level":"INFO","msg":"[Received] The Four-Year history to migrate Mercari Web to Microservices","Id : ":1}
+{"time":"2024-06-08T13:35:41.253912894Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"The Four-Year history to migrate Mercari Web to Microservices"}
+{"time":"2024-06-08T13:35:41.254304296Z","level":"INFO","msg":"[Received] The Journey to Machine-Learned Re-ranking","Id : ":1}
+{"time":"2024-06-08T13:35:41.25974593Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"The Journey to Machine-Learned Re-ranking"}
+{"time":"2024-06-08T13:35:41.260203927Z","level":"INFO","msg":"[Received] Mercari Advent Calendar 2022 is coming up!","Id : ":1}
+{"time":"2024-06-08T13:35:41.265686072Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari Advent Calendar 2022 is coming up!"}
+{"time":"2024-06-08T13:35:41.266162647Z","level":"INFO","msg":"[Received] Supply-Chain Security: Evaluation of Threats and Mitigations","Id : ":1}
+{"time":"2024-06-08T13:35:41.272847713Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Supply-Chain Security: Evaluation of Threats and Mitigations"}
+{"time":"2024-06-08T13:35:41.27338323Z","level":"INFO","msg":"[Received] Introduction of CoreSRE","Id : ":1}
+{"time":"2024-06-08T13:35:41.279344686Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Introduction of CoreSRE"}
+{"time":"2024-06-08T13:35:41.279760133Z","level":"INFO","msg":"[Received] Customer Inquiry Routing Algorithm","Id : ":1}
+{"time":"2024-06-08T13:35:41.285610532Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Customer Inquiry Routing Algorithm"}
+{"time":"2024-06-08T13:35:41.286067288Z","level":"INFO","msg":"[Received] Follow the White Rabbit: Finding The Women With The Red Dress In A Torrent of Event Logs","Id : ":1}
+{"time":"2024-06-08T13:35:41.291525673Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Follow the White Rabbit: Finding The Women With The Red Dress In A Torrent of Event Logs"}
+{"time":"2024-06-08T13:35:41.291906441Z","level":"INFO","msg":"[Received] A brief story about the rotation program and my role in it","Id : ":1}
+{"time":"2024-06-08T13:35:41.297755425Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"A brief story about the rotation program and my role in it"}
+{"time":"2024-06-08T13:35:41.298157966Z","level":"INFO","msg":"[Received] Using the OAuth 2 token exchange standard for managing the identity platform resources","Id : ":1}
+{"time":"2024-06-08T13:35:41.303825267Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Using the OAuth 2 token exchange standard for managing the identity platform resources"}
+{"time":"2024-06-08T13:35:41.304232676Z","level":"INFO","msg":"[Received] Working in a cross functional team","Id : ":1}
+{"time":"2024-06-08T13:35:41.310136071Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Working in a cross functional team"}
+{"time":"2024-06-08T13:35:41.310672086Z","level":"INFO","msg":"[Received] Optimizing React Re-Renders for Improved Performance","Id : ":1}
+{"time":"2024-06-08T13:35:41.319781913Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Optimizing React Re-Renders for Improved Performance"}
+{"time":"2024-06-08T13:35:41.320210489Z","level":"INFO","msg":"[Received] What is Data Reliability Engineering","Id : ":1}
+{"time":"2024-06-08T13:35:41.327031877Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"What is Data Reliability Engineering"}
+{"time":"2024-06-08T13:35:41.327426916Z","level":"INFO","msg":"[Received] Fast and reliable iOS builds with Bazel at Mercari","Id : ":1}
+{"time":"2024-06-08T13:35:41.333404904Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Fast and reliable iOS builds with Bazel at Mercari"}
+{"time":"2024-06-08T13:35:41.333857013Z","level":"INFO","msg":"[Received] The Journey of Invoice Microservice: From Birth to Independence","Id : ":1}
+{"time":"2024-06-08T13:35:41.339699079Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"The Journey of Invoice Microservice: From Birth to Independence"}
+{"time":"2024-06-08T13:35:41.340136523Z","level":"INFO","msg":"[Received] Mercari Customer Service Tool&#8217;s Frontend Replacement Project","Id : ":1}
+{"time":"2024-06-08T13:35:41.345872875Z","level":"INFO","msg":"Succeed","crawler_id":1,"title":"Mercari Customer Service Tool&#8217;s Frontend Replacement Project"}

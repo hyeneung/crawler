@@ -28,7 +28,19 @@
     * [ ] 크롤링한 정보를 웹에 게시판 형식으로 게시. 원하는 내용 검색해서 볼 수 있도록.
     * [ ] db 계정, 비번 정보 환경변수로 따로 관리
 ###  docker로 실행
-- https://github.com/hyeneung/crawler/tree/a8cf288694e468338426b4d56386ad25eb273265
+1. Dockerfile기반 go 이미지 빌드
+```shell
+docker build -t db-handler:1.0 -f docker/Dockerfile_dbhandler .
+```
+```shell
+docker build -t crawler:1.0 -f docker/Dockerfile_crawler .
+```
+2. docker compose 실행
+```shell
+docker compose -f ./docker/docker-compose.yml up -d
+```
+3. 결과
+  - mysql 컨테이너, db-handler(grpc server), crawler(grpc client) 순으로 실행됨. 시간 좀 걸림.
 ### goroutine 적용
 1. 각 블로그 별 크롤러 동작 비동기 처리
      * crawler/client.go/main
