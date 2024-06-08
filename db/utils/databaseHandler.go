@@ -31,14 +31,19 @@ func getConnection() *sql.DB {
 func InsertDomainDB(crawlerID uint64, domainURL string) error {
 	conn := getConnection()
 	defer conn.Close() // connection 반환(resource pool 이용)
-	_, err := conn.Exec("INSERT INTO domain (id, url) VALUES (?, ?)", crawlerID, domainURL)
+	stmt, err := conn.Prepare("INSERT INTO domain (id, url) VALUES (?, ?)")
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(crawlerID, domainURL)
 	return err
 }
 
 func InsertPostDB(post *service.Post) error {
 	conn := getConnection()
 	defer conn.Close() // connection 반환(resource pool 이용)
-	// TODO - connection 하나 받을 때 post 하나씩 넣지 말고 한 번에 여러 개 넣을 것.
 	stmt, err := conn.Prepare("INSERT INTO post (id, url, title, date) VALUES (?, ?, ?, ?)")
 
 	if err != nil {
