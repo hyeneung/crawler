@@ -1,30 +1,54 @@
 services:
   db:
     image: mysql:8
-    ports:
-      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 1234
       MYSQL_DATABASE: crawl_data
       MYSQL_USER: user
       MYSQL_PASSWORD: 1234
     volumes:
-      # var/lib/mysql에 없으면 docker-entrypoint-initdb.d에서 찾으니까 이걸 먼저
-      - ../utils/db/init_db.sql:/docker-entrypoint-initdb.d/init.sql
-      - ../utils/db/data:/var/lib/mysql
+      # docker-entrypoint-initdb.d로 init 파일 이동
+      - ../db/init_db.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../db/data:/var/lib/mysql
     healthcheck: # mysqladdmin에 성공적으로 연결되면 crawler 서비스 실행
       test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD']
       interval: 5s
       timeout: 2s
       retries: 10
 
-  crawler:
-    image: my-crawler:1.0
+  db-handler:
+    image: db-handler:1.0
+    environment:
+      - DB_USER=root
+      - DB_PASS=1234
+      - DB_HOST=db
+      - DB_PORT=3306 # db container의 외부 포트로 들어가지 않음. 같은 네트워크.
+      - DB_NAME=crawl_data # init_db.sql 참고
+    volumes: # 기준 : docker compose 파일 있는 곳
+      - ../db:/usr/src/app
     depends_on:
       db:
         condition: service_healthy
-    # restart: on-failure # 컨테이너가 중단됐을 때(db보다 먼저 살아나서 요청한 바람에 에러 뜬 경우) 컨테이너를 다시 알아서 재시작
-    command: bash -c "execute_crawler"  # 빌드 파일. Dockerfile 참고
+    healthcheck:
+      test: ["CMD", "/bin/grpc_health_probe", "-addr=:50051"]
+      interval: 5s
+      timeout: 2s
+      retries: 10
+    working_dir: /usr/src/app
+    command: bash -c "execute_db_handler"  # 빌드 파일. Dockerfile 참고
+
+  crawler:
+    image: crawler:1.0
+    depends_on:
+      db-handler:
+        condition: service_healthy
+    environment: 
+      # https://github.com/grpc/grpc/blob/master/doc/naming.md
+      - GRPC_SERVER_ADDRESS=dns:db-handler:50051
+    volumes:
+      - ../crawler:/usr/src/app
+    working_dir: /usr/src/app
+    command: bash -c "execute_crawler"
 volumes:
   db:
     driver: local

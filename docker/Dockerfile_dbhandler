@@ -1,0 +1,16 @@
+FROM golang:1.22
+
+WORKDIR /usr/src/app
+
+COPY db/go.mod db/go.sum ./
+RUN go mod download && go mod verify
+
+# Download grpc_health_probe
+ADD https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/v0.4.11/grpc_health_probe-linux-amd64 /bin/grpc_health_probe
+RUN chmod +x /bin/grpc_health_probe
+
+COPY db /usr/src/app
+RUN rm -rf /usr/src/app/test /usr/src/app/log
+
+RUN go build -v -o /usr/local/bin/execute_db_handler ./
+# CMD ["/usr/local/bin/execute_db_handler"]
