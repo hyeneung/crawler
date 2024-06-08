@@ -14,7 +14,7 @@ services:
       test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -u root --password=$$MYSQL_ROOT_PASSWORD']
       interval: 5s
       timeout: 2s
-      retries: 10
+      retries: 20
 
   db-handler:
     image: db-handler:1.0

@@ -8,7 +8,7 @@
 2. db(handler)
    - gRPC server. 게시물 정보 받아 db에 insert
 3. 웹 사이트 운영
-* later
+   * later
 ### 해야할 것(우선순위)
 1. 최소 기능 동작-rss feed를 DB에 저장 (완료)
 2. 학교 과제
@@ -27,19 +27,24 @@
     * [ ] rss feed가 제공하지 않는 예전 post 정보 크롤링. db 저장. 
     * [ ] 크롤링한 정보를 웹에 게시판 형식으로 게시. 원하는 내용 검색해서 볼 수 있도록.
     * [ ] db 계정, 비번 정보 환경변수로 따로 관리
-###  docker로 실행
-1. Dockerfile기반 go 이미지 빌드
+###  docker로 크롤링 정보 저장 코드 실행
+1. git pull 없이 docker hub 이미지와 최소 파일 만으로 실행
+     - distribute 폴더 다운, config-crawler.yaml 에서 crawler 정보 수정, 실행
 ```shell
-docker build -t db-handler:1.0 -f docker/Dockerfile_dbhandler .
+docker compose up
 ```
+1. git pull 후 직접 이미지 빌드하여 실행
+```shell
+docker build -t db-handler:1.0 -f docker/Dockerfile_dbhandler . 
+```
+  - ERROR: failed to solve: Canceled: context canceled 시 db/data 폴더 삭제
 ```shell
 docker build -t crawler:1.0 -f docker/Dockerfile_crawler .
 ```
-2. docker compose 실행
 ```shell
-docker compose -f ./docker/docker-compose.yml up -d
+docker compose -f ./docker/docker-compose-on-hand.yml up
 ```
-3. 결과
+1. 결과
   - mysql 컨테이너, db-handler(grpc server), crawler(grpc client) 순으로 실행됨. 시간 좀 걸림.
 ### goroutine 적용
 1. 각 블로그 별 크롤러 동작 비동기 처리
