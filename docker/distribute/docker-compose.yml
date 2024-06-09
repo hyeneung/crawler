@@ -45,8 +45,9 @@ services:
     environment: 
       # https://github.com/grpc/grpc/blob/master/doc/naming.md
       - GRPC_SERVER_ADDRESS=dns:db-handler:50051
-    volumes:
-      - .:/usr/src/app
+    volumes: 
+      - ./config-crawler.yaml:/usr/src/app/config-crawler.yaml
+      - ./crawler:/usr/src/app
     working_dir: /usr/src/app
     command: bash -c "execute_crawler"
 volumes:

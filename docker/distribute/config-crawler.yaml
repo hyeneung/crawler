@@ -1,0 +1,19 @@
+crawlers:
+- id: 0
+  name: lineCrawler
+  initialized: true
+  rss:
+    url: https://techblog.lycorp.co.jp/ko/feed/index.xml
+    lastUpdated: 1717883568
+- id: 1
+  name: mercariCrawler
+  initialized: true
+  rss:
+    url: https://engineering.mercari.com/en/blog/feed.xml
+    lastUpdated: 1717883569
+- id: 2
+  name: kurlyCrawler
+  initialized: true
+  rss:
+    url: https://helloworld.kurly.com/feed.xml
+    lastUpdated: 1717883569

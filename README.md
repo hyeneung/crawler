@@ -14,14 +14,14 @@
 2. 학교 과제
     * [x] docker compose로 mysql, 크롤러 2개 서비스 구성.
     * [x] gRPC로 crawler에서 db(handler)의 함수 호출. 4가지 방식 이용 
-    * [ ] kubernetes 이용해서 crawler pod과 db pod 만들어 통신
-         * crawler/db/mysql 컨테이너 만듦
-         * db, mysql은 같은 pod에. mysql volume 추가
-         * grpc_health_probe와 mysql health check 넣을 것
+    * [x] kubernetes 이용해서 crawler pod과 db pod 만들어 통신
+         * crawler/db/mysql pod 만듦
+         * grpc_health_probe와 mysql health check 이용
+         * crawler는 cronjob으로. 매번 설정 파일 읽어 동작
 3. 성능 개선
     * [x] 전체적으로 goroutine 적용해서 비동기처리
 4. 운영 측면 기능 추가
-    * [ ] 하루 단위로 프로그램 실행. 기술 블로그 업데이트 확인 및 반영 (linux crontab 적용 or k8s cronjob)
+    * [x] 하루 단위로 프로그램 실행. 기술 블로그 업데이트 확인 및 반영 (linux crontab 적용 or k8s cronjob)
     * [x] 설정 파일로 크롤러 정보 받아 프로그램 수행
 5. 서비스 완전성(방학때 웹 공부용)
     * [ ] rss feed가 제공하지 않는 예전 post 정보 크롤링. db 저장. 
@@ -29,23 +29,35 @@
     * [ ] db 계정, 비번 정보 환경변수로 따로 관리
 ###  docker로 크롤링 정보 저장 코드 실행
 1. git pull 없이 docker hub 이미지와 최소 파일 만으로 실행
-     - distribute 폴더 다운, config-crawler.yaml 에서 crawler 정보 수정, 실행
-```shell
-docker compose up
-```
-1. git pull 후 직접 이미지 빌드하여 실행
-```shell
-docker build -t db-handler:1.0 -f docker/Dockerfile_dbhandler . 
-```
-  - ERROR: failed to solve: Canceled: context canceled 시 db/data 폴더 삭제
-```shell
-docker build -t crawler:1.0 -f docker/Dockerfile_crawler .
-```
-```shell
-docker compose -f ./docker/docker-compose-on-hand.yml up
-```
-1. 결과
-  - mysql 컨테이너, db-handler(grpc server), crawler(grpc client) 순으로 실행됨. 시간 좀 걸림.
+     - docker/distribute 폴더 다운, config-crawler.yaml 에서 crawler 정보 수정 후 docker compose up
+2. git pull 후 직접 이미지 빌드하여 실행(에러 발생 시 db/data 폴더 삭제)
+    ```shell
+    docker build -t db-handler:1.0 -f docker/Dockerfile_dbhandler . 
+    ```
+    ```shell
+    docker build -t crawler:1.0 -f docker/Dockerfile_crawler .
+    ```
+    ```shell
+    docker compose -f ./docker/docker-compose-on-hand.yml up
+    ```
+3. 결과
+     - mysql 컨테이너, db-handler(grpc server), crawler(grpc client) 순으로 실행됨. mysql health check, grpc health check 때문에 시간 좀 걸림.
+### kubernetes로 실행
+ - CronJob 이용하여 crawler가 일정 주기마다 실행되도록 함.
+1. k8s 폴더 내 3개 yaml 파일 hostPath 부분 수정 후 crawler.yaml의 hostPath위치에 config-crawler.yaml 파일 둠.
+2. 해당 폴더에서 k8s 실행
+    ```shell
+    kubectl apply -f mysql.yaml
+    kubectl apply -f db-handler.yaml
+    kubectl apply -f crawler.yaml
+    ```
+3. 종료
+    ```shell
+    kubectl delete -f crawler.yaml
+    kubectl delete -f db-handler.yaml
+    kubectl delete -f mysql.yaml
+    ```
+## 고민한 것
 ### goroutine 적용
 1. 각 블로그 별 크롤러 동작 비동기 처리
      * crawler/client.go/main
@@ -53,7 +65,6 @@ docker compose -f ./docker/docker-compose-on-hand.yml up
      * crawler/utils/xmlHandler.go/CheckUpdatedPost
 3. gRPC streaming 함수들. 여러 개 보내는 동작, 받는 동작 비동기 처리. 
      * crawler/client.go/  db/server.go/
-## 고민한 것
 ### DB
 1. 스키마
  * url 중복도메인 - 한 회사의 기술 블로그 게시물 많음

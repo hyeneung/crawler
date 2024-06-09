@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-handler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-handler
+  template:
+    metadata:
+      labels:
+        app: db-handler
+    spec:
+      containers:
+      - name: db-handler
+        image: hyeneung/db-handler:1.0
+        env:
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASS
+          value: "1234"
+        - name: DB_HOST
+          value: "mysql"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_NAME
+          value: "crawl_data"
+        volumeMounts:
+        - name: app-volume
+          mountPath: /usr/src/app
+        livenessProbe:
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command: ["/bin/grpc_health_probe", "-addr=:50051"]
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        command: ["bash", "-c", "execute_db_handler"]
+      volumes:
+      - name: app-volume
+        hostPath:
+          path: /run/desktop/mnt/host/c/Users/hyeneung/k8s-app-data/db
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-handler
+spec:
+  ports:
+    - port: 50051
+  selector:
+    app: db-handler

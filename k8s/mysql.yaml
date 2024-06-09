@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-db-sql
+data:
+  init_db.sql: |
+    DROP DATABASE IF EXISTS crawl_data;
+    CREATE DATABASE crawl_data default CHARACTER SET UTF8;
+    USE crawl_data;
+    DROP TABLE IF EXISTS post;
+    DROP TABLE IF EXISTS domain;
+    CREATE TABLE domain(
+        id BIGINT NOT NULL UNIQUE PRIMARY KEY,
+        url VARCHAR(500) NOT NULL
+    );
+    CREATE TABLE post(
+        id BIGINT NOT NULL,
+        url VARCHAR(500) NOT NULL,
+        title VARCHAR(500) NOT NULL,
+        date BIGINT,
+        PRIMARY KEY(id, url),
+        FOREIGN KEY(id) 
+        REFERENCES domain(id) ON UPDATE CASCADE ON DELETE CASCADE
+    );
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "1234"
+        - name: MYSQL_DATABASE
+          value: "crawl_data"
+        - name: MYSQL_USER
+          value: "user"
+        - name: MYSQL_PASSWORD
+          value: "1234"
+        volumeMounts:
+        - name: mysql-initdb
+          mountPath: /docker-entrypoint-initdb.d
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+        livenessProbe:
+          exec:
+            command: ["mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "--password=1234"]
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command: ["mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "--password=1234"]
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      volumes:
+      - name: mysql-initdb
+        configMap:
+          name: init-db-sql
+      - name: mysql-data
+        hostPath:
+          path: /run/desktop/mnt/host/c/Users/hyeneung/k8s-app-data/db/data
+          type: DirectoryOrCreate
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: mysql
